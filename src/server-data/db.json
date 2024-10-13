@@ -1,0 +1,20 @@
+{
+  "medications": [
+    {
+      "id": 1,
+      "brandName": "Fake Med",
+      "chemName": "Fake generic name",
+      "doseVal": 1,
+      "doseUnit": "mg",
+      "freqDoses": 1,
+      "freqDays": 1,
+      "minHoursBtw": 2,
+      "isOptional": false,
+      "isActive": true,
+      "isInterchangeable": false,
+      "currentStock": 150,
+      "reorderLim": 90,
+      "notes": "This is a fake medication for demonstration purposes."
+    }
+  ]
+}
