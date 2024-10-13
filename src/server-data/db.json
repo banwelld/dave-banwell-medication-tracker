@@ -2,19 +2,20 @@
   "medications": [
     {
       "id": 1,
-      "brandName": "Fake Med",
-      "chemName": "Fake generic name",
+      "brandName": "fakename",
+      "genericName": "fakename",
       "doseVal": 1,
       "doseUnit": "mg",
-      "freqDoses": 1,
-      "freqDays": 1,
-      "minHoursBtw": 2,
+      "doseCount": 3,
+      "dosingDays": 1,
+      "hasMinInterval": true,
+      "intervalHours": 1,
       "isOptional": false,
       "isActive": true,
-      "isInterchangeable": false,
-      "currentStock": 150,
-      "reorderLim": 90,
-      "notes": "This is a fake medication for demonstration purposes."
+      "isInterchangeable": true,
+      "currentDoses": 360,
+      "lowStockLimit": 90,
+      "notes": "Take with lots of water"
     }
   ]
 }
