@@ -2,20 +2,21 @@
   "medications": [
     {
       "id": 1,
-      "brandName": "fakename",
-      "genericName": "fakename",
-      "doseVal": 1,
-      "doseUnit": "mg",
-      "doseCount": 3,
-      "dosingDays": 1,
+      "brandName": "Bio-Tech D3-5",
+      "genericName": "Vitamin D3 (dry)",
+      "descriotion": "Small, transparent capsule filled with white powder",
+      "imgUrl": "../images/vit-d.jpg",
+      "doseVal": 5000,
+      "doseUnit": "IU",
+      "dailyDoses": 3,
       "hasMinInterval": true,
-      "intervalHours": 1,
+      "intervalHours": 2,
+      "lastDoseTs": "2024/10/13 10:30pm",
       "isOptional": false,
       "isActive": true,
-      "isInterchangeable": true,
       "currentDoses": 360,
       "lowStockLimit": 90,
-      "notes": "Take with lots of water"
+      "doseNotes": "Take at the same time as calcium"
     }
   ]
 }

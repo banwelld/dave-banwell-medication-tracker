@@ -5,10 +5,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <Outlet />
-    </div>
+    <>
+      <header>
+        <Header />
+      </header>
+      <main className="container">
+        <Outlet />
+      </main>
+    </>
   );
 }
 
