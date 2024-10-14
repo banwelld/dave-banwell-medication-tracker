@@ -1,6 +1,6 @@
 import React from 'react';
 
-function DrugCard({ drug: { imgUrl, brandName, genericName, intervalHours, doseVal, doseUnit, dailyDoses, isOptional, lastDoseTs } }) {
+function DrugCard({ drug: { imgUrl, brandName, genericName, dailyDoses, isOptional, lastDoseTs } }) {
 
     return (
         <div className="card shadow-sm" style={{width: "12rem"}}>

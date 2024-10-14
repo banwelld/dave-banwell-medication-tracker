@@ -16,7 +16,22 @@
       "isActive": true,
       "currentDoses": 360,
       "lowStockLimit": 90,
-      "doseNotes": "Take at the same time as calcium"
+      "doseNotes": "Take at the same time as calcium",
+      "infoTags": [
+        {
+          "withFood": false,
+          "takeBedtime": false,
+          "takeMorning": false,
+          "onEmptyStomach": false,
+          "avoidDrugs": false,
+          "avoidFoods": false,
+          "avoidAlcohol": false,
+          "withWater": false,
+          "dontDiscontinue": false,
+          "allergyPotential": false,
+          "finishAll": false
+        }
+      ]
     }
   ]
 }
