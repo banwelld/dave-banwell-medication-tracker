@@ -57,53 +57,53 @@ function AddDrug() {
                             <div className="col-3">
                                 <div className="form-check">
                                     <input type="checkbox" className="form-check-input" id="withFood" />
-                                    <label htmlFor="isOptional" className="form-check-label ms-1">Take with food</label>
+                                    <label htmlFor="withFood" className="form-check-label ms-1">Take with food</label>
                                 </div>
                                 <div className="form-check">
                                     <input type="checkbox" className="form-check-input" id="withWater" />
-                                    <label htmlFor="isOptional" className="form-check-label ms-1">Take with water</label>
+                                    <label htmlFor="withWater" className="form-check-label ms-1">Take with water</label>
                                 </div>
                                 <div className="form-check">
                                     <input type="checkbox" className="form-check-input" id="emptyStomach" />
-                                    <label htmlFor="isOptional" className="form-check-label ms-1">Take on empty stomach</label>
+                                    <label htmlFor="emptyStomach" className="form-check-label ms-1">Take on empty stomach</label>
                                 </div>
                                 <div className="form-check">
                                     <input type="checkbox" className="form-check-input" id="fullStomach" />
-                                    <label htmlFor="isOptional" className="form-check-label ms-1">Take on full stomach</label>
+                                    <label htmlFor="fullStomach" className="form-check-label ms-1">Take on full stomach</label>
                                 </div>
                                 <div className="form-check">
                                     <input type="checkbox" className="form-check-input" id="atBedtime" />
-                                    <label htmlFor="isOptional" className="form-check-label ms-1">Take before bedtime</label>
+                                    <label htmlFor="atBedtime" className="form-check-label ms-1">Take before bedtime</label>
                                 </div>
                                 <div className="form-check">
                                     <input type="checkbox" className="form-check-input" id="onWakeup" />
-                                    <label htmlFor="isOptional" className="form-check-label ms-1">Take in the morning</label>
+                                    <label htmlFor="onWakeup" className="form-check-label ms-1">Take in the morning</label>
                                 </div>
                             </div>
                             <div className="col-3">
                                 <div className="form-check">
                                     <input type="checkbox" className="form-check-input" id="noAlcohol" />
-                                    <label htmlFor="isOptional" className="form-check-label ms-1">No alcohol</label>
+                                    <label htmlFor="noAlcohol" className="form-check-label ms-1">No alcohol</label>
                                 </div>
                                 <div className="form-check">
                                     <input type="checkbox" className="form-check-input" id="avoidFoods" />
-                                    <label htmlFor="isOptional" className="form-check-label ms-1">Food restrictions</label>
+                                    <label htmlFor="avoidFoods" className="form-check-label ms-1">Food restrictions</label>
                                 </div>
                                 <div className="form-check">
                                     <input type="checkbox" className="form-check-input" id="avoidDrugs" />
-                                    <label htmlFor="isOptional" className="form-check-label ms-1">Drug interactions</label>
+                                    <label htmlFor="avoidDrugs" className="form-check-label ms-1">Drug interactions</label>
                                 </div>
                                 <div className="form-check">
                                     <input type="checkbox" className="form-check-input" id="evenSpacing" />
-                                    <label htmlFor="isOptional" className="form-check-label ms-1">Spaced evenly</label>
+                                    <label htmlFor="evenSpacing" className="form-check-label ms-1">Spaced evenly</label>
                                 </div>
                                 <div className="form-check">
                                     <input type="checkbox" className="form-check-input" id="finishAll" />
-                                    <label htmlFor="isOptional" className="form-check-label ms-1">Finish entire course</label>
+                                    <label htmlFor="finishAll" className="form-check-label ms-1">Finish entire course</label>
                                 </div>
                                 <div className="form-check">
                                     <input type="checkbox" className="form-check-input" id="noDiscontinue" />
-                                    <label htmlFor="isOptional" className="form-check-label ms-1">Do not stop abruptly</label>
+                                    <label htmlFor="noDiscontinue" className="form-check-label ms-1">Do not stop abruptly</label>
                                 </div>
                             </div>
                             <div className="col-6">

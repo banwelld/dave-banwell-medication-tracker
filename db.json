@@ -33,5 +33,55 @@
         }
       ]
     }
+  ],
+  "warnings": [
+    {
+      "code": "withFood",
+      "labelText": "Take with food"
+    },
+    {
+      "code": "withWater",
+      "labelText": "Take with plenty of water"
+    },
+    {
+      "code": "onSleep",
+      "labelText": "Take just before bedtime"
+    },
+    {
+      "code": "onWake",
+      "labelText": "Take just after waking up"
+    },
+    {
+      "code": "fullStomach",
+      "labelText": "Take on a full stomach"
+    },
+    {
+      "code": "emptyStomach",
+      "labelText": "Take on an empty stomach"
+    },
+    {
+      "code": "avoidAlcohol",
+      "labelText": "Avoid alcohol completely"
+    },
+    {
+      "code": "causesSleep",
+      "labelText": "Causes drowsiness/sleepiness"
+    },
+    {
+      "code": "evenDosing",
+      "labelText": "Spread doses throughout day"
+    },
+    {
+      "code": "takeAll",
+      "labelText": "Complete the entire course"
+    },
+    {	
+      "code": "dontStop",
+      "labelText": "Seek medical advice before stopping"
+    },
+    {
+      "code": "NoDriving",
+      "labelText": "Do not drive after use"
+    }
   ]
 }
