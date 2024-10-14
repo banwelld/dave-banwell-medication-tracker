@@ -4,10 +4,10 @@ import SearchFilter from "../components/SearchFilter";
 
 function Home() {
     return (
-        <div>
+        <body>
             <SearchFilter />
             <DrugMatrix />
-        </div>
+        </body>
     );
 }
 

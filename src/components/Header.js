@@ -4,7 +4,9 @@ import NavBar from "./NavBar";
 function Header() {
     return (
         <header>
-            <h1 className="display-5">My Medication Tracker</h1>
+            <div className="container text-center">
+                <h1>My Medication Tracker</h1>
+            </div>
             <NavBar />
         </header>
     );
