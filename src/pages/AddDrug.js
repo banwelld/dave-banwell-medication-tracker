@@ -1,6 +1,32 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import CautionBox from "../components/CautionBox";
 
 function AddDrug() {
+
+    // state variables for form inputs
+
+    const [warnings, setWarnings] = useState([]);
+
+    // function to fetch warnings from API
+
+    const getWarnings = () => {
+        fetch("http://localhost:6001/warnings")
+            .then((response) => response.json())
+            .then((data) => setWarnings(data))
+            .catch((error) => console.log(error));
+    };
+
+    // useEffect to load warnings into state on component mount
+
+    useEffect(() => getWarnings(), []);
+
+    // function to create a list of warning checkboxes for the form
+
+    const checkboxList = () => {
+        return warnings.map((warning) => (
+            <CautionBox key={warning.id} boxId={warning.id} labelText={warning.labelText} />
+        ));
+    };
 
     return (
         <>
@@ -54,60 +80,14 @@ function AddDrug() {
                     <div className="p-3 mt-1">
                         <div className="row g-3 p-3 mb-3 border border-1 border-info rounded-3">
                             <h6 className="text-info mt-0">Cautions and Warnings</h6>
-                            <div className="col-3">
-                                <div className="form-check">
-                                    <input type="checkbox" className="form-check-input" id="withFood" />
-                                    <label htmlFor="withFood" className="form-check-label ms-1">Take with food</label>
-                                </div>
-                                <div className="form-check">
-                                    <input type="checkbox" className="form-check-input" id="withWater" />
-                                    <label htmlFor="withWater" className="form-check-label ms-1">Take with water</label>
-                                </div>
-                                <div className="form-check">
-                                    <input type="checkbox" className="form-check-input" id="emptyStomach" />
-                                    <label htmlFor="emptyStomach" className="form-check-label ms-1">Take on empty stomach</label>
-                                </div>
-                                <div className="form-check">
-                                    <input type="checkbox" className="form-check-input" id="fullStomach" />
-                                    <label htmlFor="fullStomach" className="form-check-label ms-1">Take on full stomach</label>
-                                </div>
-                                <div className="form-check">
-                                    <input type="checkbox" className="form-check-input" id="atBedtime" />
-                                    <label htmlFor="atBedtime" className="form-check-label ms-1">Take before bedtime</label>
-                                </div>
-                                <div className="form-check">
-                                    <input type="checkbox" className="form-check-input" id="onWakeup" />
-                                    <label htmlFor="onWakeup" className="form-check-label ms-1">Take in the morning</label>
+                            <div className="col-8">
+                                <div className="row g-2">
+                                    {/* Render warning checkboxes in a grid */}
+                                    {checkboxList()}
                                 </div>
                             </div>
-                            <div className="col-3">
-                                <div className="form-check">
-                                    <input type="checkbox" className="form-check-input" id="noAlcohol" />
-                                    <label htmlFor="noAlcohol" className="form-check-label ms-1">No alcohol</label>
-                                </div>
-                                <div className="form-check">
-                                    <input type="checkbox" className="form-check-input" id="avoidFoods" />
-                                    <label htmlFor="avoidFoods" className="form-check-label ms-1">Food restrictions</label>
-                                </div>
-                                <div className="form-check">
-                                    <input type="checkbox" className="form-check-input" id="avoidDrugs" />
-                                    <label htmlFor="avoidDrugs" className="form-check-label ms-1">Drug interactions</label>
-                                </div>
-                                <div className="form-check">
-                                    <input type="checkbox" className="form-check-input" id="evenSpacing" />
-                                    <label htmlFor="evenSpacing" className="form-check-label ms-1">Spaced evenly</label>
-                                </div>
-                                <div className="form-check">
-                                    <input type="checkbox" className="form-check-input" id="finishAll" />
-                                    <label htmlFor="finishAll" className="form-check-label ms-1">Finish entire course</label>
-                                </div>
-                                <div className="form-check">
-                                    <input type="checkbox" className="form-check-input" id="noDiscontinue" />
-                                    <label htmlFor="noDiscontinue" className="form-check-label ms-1">Do not stop abruptly</label>
-                                </div>
-                            </div>
-                            <div className="col-6">
-                                <label for="doseNotes" className="form-label">Special instructions or use notes</label>
+                            <div className="col-4">
+                                <label htmlFor="doseNotes" className="form-label">Special instructions or use notes</label>
                                 <textarea className="form-control" rows="4" id="doseNotes" />
                             </div>
                         </div>

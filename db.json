@@ -36,51 +36,51 @@
   ],
   "warnings": [
     {
-      "code": "withFood",
+      "id": "withFood",
       "labelText": "Take with food"
     },
     {
-      "code": "withWater",
+      "id": "withWater",
       "labelText": "Take with plenty of water"
     },
     {
-      "code": "onSleep",
-      "labelText": "Take just before bedtime"
+      "id": "onSleep",
+      "labelText": "Take before bedtime"
     },
     {
-      "code": "onWake",
-      "labelText": "Take just after waking up"
+      "id": "onWake",
+      "labelText": "Take when waking up"
     },
     {
-      "code": "fullStomach",
-      "labelText": "Take on a full stomach"
+      "id": "fullStomach",
+      "labelText": "Take on full stomach"
     },
     {
-      "code": "emptyStomach",
-      "labelText": "Take on an empty stomach"
+      "id": "emptyStomach",
+      "labelText": "Take on empty stomach"
     },
     {
-      "code": "avoidAlcohol",
-      "labelText": "Avoid alcohol completely"
+      "id": "avoidAlcohol",
+      "labelText": "No alcohol allowed"
     },
     {
-      "code": "causesSleep",
-      "labelText": "Causes drowsiness/sleepiness"
+      "id": "causesSleep",
+      "labelText": "Causes drowsiness"
     },
     {
-      "code": "evenDosing",
-      "labelText": "Spread doses throughout day"
+      "id": "evenDosing",
+      "labelText": "Spread doses out"
     },
     {
-      "code": "takeAll",
-      "labelText": "Complete the entire course"
+      "id": "takeAll",
+      "labelText": "Take all doses"
     },
     {	
-      "code": "dontStop",
-      "labelText": "Seek medical advice before stopping"
+      "id": "dontStop",
+      "labelText": "Do not discontinue"
     },
     {
-      "code": "NoDriving",
+      "id": "NoDriving",
       "labelText": "Do not drive after use"
     }
   ]
