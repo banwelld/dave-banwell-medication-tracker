@@ -35,8 +35,8 @@ function AddDrug() {
 
     const handleInfoChange = (e) => {
         setNewDrug({ ...newDrug, [e.target.id]: e.target.value });
+        console.log(newDrug);
     };
-
 
     // useEffect to load warnings into state on component mount
 
@@ -54,63 +54,65 @@ function AddDrug() {
         ));
     };
 
-    console.log(warnings)
-
     return (
         <>
             <h4 className="mt-2">Add New Medication</h4>
             <div className="border border-2 border-info rounded-3 mb-3">
                 <form className="p-3">
                     <div className="row">
-                        <h5 className="text-info">Drug info</h5>
                         <div className="col">
-                            <div className="row g-3">
-                                <div className="col-4">
-                                    <label for="brandName" className="form-label">Brand Name</label>
-                                    <input type="text" className="form-control" id="brandName" />
-                                    <div id="brandNameHelp" className="form-text">E.g., Lipitor, Zithromax, Prilosec</div>
+                            <h5 className="text-info">Drug info</h5>
+                            <div className="col">
+                                <div className="row g-3">
+                                    <div className="col-2">
+                                        <label htmlFor="brandName" className="form-label">Brand Name</label>
+                                        <input type="text" className="form-control" id="brandName" onChange={handleInfoChange} />
+                                        <div id="brandNameHelp" className="form-text">E.g., Lipitor, Prilosec</div>
+                                    </div>
+                                    <div className="col-3">
+                                        <label htmlFor="genericName" className="form-label">Generic/Chemical Name</label>
+                                        <input type="text" className="form-control" id="genericName" onChange={handleInfoChange} />
+                                        <div id="genericNameHelp" className="form-text">E.g., Atorvastatin, Omeprazole</div>
+                                    </div>
+                                    <div className="col-2">
+                                        <label htmlFor="doseVal" className="form-label">Strength</label>
+                                        <input type="number" step="1" className="form-control" id="doseVal" onChange={handleInfoChange} />
+                                    </div>
+                                    <div className="col-1">
+                                        <label htmlFor="doseUnits" className="form-label">Units</label>
+                                        <select id="doseUnits" className="form-select" onChange={handleInfoChange}>
+                                            <option selected>mg</option>
+                                            <option value="1">ug</option>
+                                            <option value="2">ml</option>
+                                            <option value="3">IU</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div className="col-4">
-                                    <label for="genericName" className="form-label">Generic/Chemical Name</label>
-                                    <input type="text" className="form-control" id="genericName" />
-                                    <div id="genericNameHelp" className="form-text">E.g., Atorvastatin, Azithromycin, Omeprazole</div>
-                                </div>
-                                <div className="col-3">
-                                    <label for="doseVal" className="form-label">Dose Quantity</label>
-                                    <input type="number" step="1" className="form-control" id="doseVal" />
-                                </div>
-                                <div className="col-1">
-                                    <label for="doseUnits" className="form-label">Units</label>
-                                    <select id="doseUnits" class="form-select">
-                                        <option selected>mg</option>
-                                        <option value="1">ug</option>
-                                        <option value="2">ml</option>
-                                        <option value="3">IU</option>
-                                    </select>
+                            </div>
+                        </div>
+                        <div className="col-5">
+                            <h5 className="text-info">Instructions</h5>
+                            <div className="row g-3 p-3">
+                                <div className="col">
+                                    <div className="input-group">
+                                        <input type="number" step="1" className="form-control" id="intervalQty" onChange={handleInfoChange} />
+                                        <span className="input-group-text">doses every</span>
+                                        <input type="number" step="1" className="form-control" id="intervalVal" onChange={handleInfoChange} />
+                                        <span className="input-group-text">day </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="row mt-3">
                         <div className="col-5">
-                            <h5 className="text-info">Instructions</h5>
-                            <div className="row g-3 p-3">
-                                <div className="col">
-                                    <div className="input-group">
-                                        <span className="input-group-text">Take</span>
-                                        <input type="number" step="1" className="form-control" id="intervalQty" />
-                                        <span className="input-group-text">doses every</span>
-                                        <input type="number" step="1" className="form-control" id="intervalVal" />
-                                        <span className="input-group-text">day</span>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                         <div className="col-4">
                             <h5 className="text-info">Cautions</h5>
                             <div className="row g-3 p-3">
                                 <div className="col">
-                                    <select id="warnings" class="form-select" multiple size="3">
+                                    <select id="warnings" className="form-select" defaultValue={[]} onChange={handleInfoChange} multiple size="3">
                                         {/* warning list from the API */}
                                         {warningList()}
                                     </select>
@@ -123,7 +125,7 @@ function AddDrug() {
                             <div className="row g-3 p-3 mb-3">
                                 <div className="col-9">
                                     <div className="input-group mb-3">
-                                        <input type="number" step="1" className="form-control" id="inStock" />
+                                        <input type="number" step="1" className="form-control" id="inStock" onChange={handleInfoChange} />
                                         <span className="input-group-text">doses</span>
                                     </div>
                                 </div>
