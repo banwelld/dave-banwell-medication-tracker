@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function DrugCard({ updateDrug, drug: { id, imgUrl, brandName, genericName, dailyQty, inStock, isOptional } }) {
 
@@ -8,23 +9,32 @@ function DrugCard({ updateDrug, drug: { id, imgUrl, brandName, genericName, dail
     const dailyQtyNum = parseInt(dailyQty);
     const daysRemaining = parseInt(inStockNum/dailyQtyNum);
 
-    // set background to warning if refill needed
+    // change card background to indicate low or no stock
 
-    const classNameWarn = daysRemaining <= 5 ? "card shadow-sm mx-auto bg-warning" : "card shadow-sm mx-auto bg-light";
+    const classNameWarn = () => {
+        switch (true) {
+            case daysRemaining === 0:
+                return "card shadow mx-auto bg-danger";
+            case daysRemaining <= 5:
+                return "card shadow mx-auto bg-warning";
+            default:
+                return "card shadow mx-auto bg-light";
+        };
+    };
 
     // update drug data on click
 
     const takeNowClick = () => {
         if (!inStockNum) {
-            alert("You do not have any of this medication in stock. Please go to the drug's information page to update your stock if you've recently refilled.");
+            alert("You do not have any of this medication in stock. Please visit the drug's info page to update your stock if you've refilled it.");
         } else {
             updateDrug(id, {inStock: inStockNum - 1});
         };
     };
 
     return (
-        <div className="col-3 mt-3">
-            <div className={classNameWarn} style={{width: "14rem"}}>
+        <div className="col-3 mt-3 mb-3">
+            <div className={classNameWarn()} style={{width: "14rem"}}>
                 <div className="row align-items-center p-1" style={{height: "14rem"}}>
                     <img src={imgUrl} className="card-img-top" alt={brandName} />
                 </div>
@@ -44,7 +54,7 @@ function DrugCard({ updateDrug, drug: { id, imgUrl, brandName, genericName, dail
                     >
                         Take Now
                     </button>
-                    <a href="http://facebook.com" className="btn btn-secondary mt-3 shadow container">View Drug Info</a>
+                    <Link to={`/DrugInfo/${id}`} className="btn btn-secondary mt-3 shadow container">View Drug Info</Link>
                 </div>
             </div>
         </div>
