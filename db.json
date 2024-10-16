@@ -6,7 +6,7 @@
       "doseVal": "40",
       "dailyQty": "1",
       "fullStomach": true,
-      "inStock": "14",
+      "inStock": -732,
       "imgUrl": "https://vyvansemedication.com/wp-content/uploads/2020/02/40mg-capsule.jpg",
       "id": 4
     },
@@ -17,7 +17,7 @@
       "doseUnits": "4",
       "dailyQty": "3",
       "evenDosing": true,
-      "inStock": "600",
+      "inStock": -120,
       "imgUrl": "https://www.lifestreamrx.com/cdn-cgi/image/quality%3D85/assets/images/73894.jpg",
       "id": 5
     },
@@ -27,7 +27,7 @@
       "doseVal": "35",
       "dailyQty": "5",
       "avoidAlcohol": true,
-      "inStock": "72",
+      "inStock": -630,
       "imgUrl": "https://www.dea.gov/sites/default/files/2022-08/30mg%20countefeit%20oxy_front_backside%20w%20watermarkx.jpg",
       "id": 6
     },
@@ -37,7 +37,7 @@
       "doseVal": "35",
       "dailyQty": "5",
       "avoidAlcohol": true,
-      "inStock": "72",
+      "inStock": -618,
       "imgUrl": "https://www.dea.gov/sites/default/files/2022-08/30mg%20countefeit%20oxy_front_backside%20w%20watermarkx.jpg",
       "id": 7
     },
@@ -47,7 +47,7 @@
       "doseVal": "35",
       "dailyQty": "5",
       "avoidAlcohol": true,
-      "inStock": "72",
+      "inStock": -616,
       "imgUrl": "https://www.dea.gov/sites/default/files/2022-08/30mg%20countefeit%20oxy_front_backside%20w%20watermarkx.jpg",
       "id": 8
     }

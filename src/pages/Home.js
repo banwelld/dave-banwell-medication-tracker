@@ -26,6 +26,23 @@ function Home() {
 
     const renderNewDrug = (drug) => setAllDrugData(prevData => [...prevData, drug]);
 
+    // send drug update to server
+
+    const updateDrug = (id, updateObj) => {
+        fetch(`http://localhost:6001/medications/${id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updateObj),
+        })
+           .then((response) => response.json())
+           .then((updatedDrug) => {
+                setAllDrugData(prevData => prevData.map(d => d.id === updatedDrug.id ? updatedDrug : d));
+            })
+           .catch((error) => console.log(error));
+    };
+
     return (
         <>
             <div className="accordion mt-3 mb-3" id="homepageAccordion">
@@ -54,7 +71,7 @@ function Home() {
                     </div>
                 </div>
             </div>            
-            <DrugMatrix allDrugData={allDrugData} />
+            <DrugMatrix updateDrug={updateDrug} allDrugData={allDrugData} />
         </>
     );
 }
