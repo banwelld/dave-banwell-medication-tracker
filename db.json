@@ -1,40 +1,62 @@
 {
   "medications": [
     {
-      "id": 1,
-      "brandName": "Bio-Tech D3-5",
-      "genericName": "Vitamin D3 (dry)",
-      "descriotion": "Small, transparent capsule filled with white powder",
-      "imgUrl": "../images/vit-d.jpg",
-      "doseVal": 5000,
-      "doseUnit": "IU",
-      "dailyDoses": 3,
-      "hasMinInterval": true,
-      "intervalHours": 2,
-      "lastDoseTs": "2024/10/13 10:30pm",
-      "isOptional": false,
-      "isActive": true,
-      "currentDoses": 360,
-      "lowStockLimit": 90,
-      "doseNotes": "Take at the same time as calcium",
-      "infoTags": [
-        {
-          "withFood": false,
-          "takeBedtime": false,
-          "takeMorning": false,
-          "onEmptyStomach": false,
-          "avoidDrugs": false,
-          "avoidFoods": false,
-          "avoidAlcohol": false,
-          "withWater": false,
-          "dontDiscontinue": false,
-          "allergyPotential": false,
-          "finishAll": false
-        }
-      ]
+      "brandName": "Vyvanse",
+      "genericName": "Lisdexamphetamine",
+      "doseVal": "40",
+      "dailyQty": "1",
+      "fullStomach": true,
+      "inStock": "14",
+      "imgUrl": "https://vyvansemedication.com/wp-content/uploads/2020/02/40mg-capsule.jpg",
+      "id": 4
+    },
+    {
+      "brandName": "Drug",
+      "genericName": "FancyName",
+      "doseVal": "3000",
+      "doseUnits": "4",
+      "dailyQty": "3",
+      "evenDosing": true,
+      "inStock": "600",
+      "imgUrl": "https://www.lifestreamrx.com/cdn-cgi/image/quality%3D85/assets/images/73894.jpg",
+      "id": 5
+    },
+    {
+      "brandName": "Drug",
+      "genericName": "FancyName",
+      "doseVal": "35",
+      "dailyQty": "5",
+      "avoidAlcohol": true,
+      "inStock": "72",
+      "imgUrl": "https://www.dea.gov/sites/default/files/2022-08/30mg%20countefeit%20oxy_front_backside%20w%20watermarkx.jpg",
+      "id": 6
+    },
+    {
+      "brandName": "Drug",
+      "genericName": "FancyName",
+      "doseVal": "35",
+      "dailyQty": "5",
+      "avoidAlcohol": true,
+      "inStock": "72",
+      "imgUrl": "https://www.dea.gov/sites/default/files/2022-08/30mg%20countefeit%20oxy_front_backside%20w%20watermarkx.jpg",
+      "id": 7
+    },
+    {
+      "brandName": "Drug",
+      "genericName": "FancyName",
+      "doseVal": "35",
+      "dailyQty": "5",
+      "avoidAlcohol": true,
+      "inStock": "72",
+      "imgUrl": "https://www.dea.gov/sites/default/files/2022-08/30mg%20countefeit%20oxy_front_backside%20w%20watermarkx.jpg",
+      "id": 8
     }
   ],
   "warnings": [
+    {
+      "id": "isOptional",
+      "labelText": "As needed"
+    },
     {
       "id": "withFood",
       "labelText": "Take with food"
@@ -42,14 +64,6 @@
     {
       "id": "withWater",
       "labelText": "Take with plenty of water"
-    },
-    {
-      "id": "onSleep",
-      "labelText": "Take before bedtime"
-    },
-    {
-      "id": "onWake",
-      "labelText": "Take when waking up"
     },
     {
       "id": "fullStomach",
@@ -60,24 +74,32 @@
       "labelText": "Take on empty stomach"
     },
     {
+      "id": "onSleep",
+      "labelText": "Take near bedtime"
+    },
+    {
+      "id": "onWake",
+      "labelText": "Take just after waking up"
+    },
+    {
       "id": "avoidAlcohol",
-      "labelText": "No alcohol allowed"
+      "labelText": "Do not drink alcohol while taking"
     },
     {
       "id": "causesSleep",
-      "labelText": "Causes drowsiness"
+      "labelText": "May cause drosiness."
     },
     {
       "id": "evenDosing",
-      "labelText": "Spread doses out"
+      "labelText": "Spread doses through the day"
     },
     {
       "id": "takeAll",
-      "labelText": "Take all doses"
+      "labelText": "Take the entire course"
     },
-    {	
+    {
       "id": "dontStop",
-      "labelText": "Do not discontinue"
+      "labelText": "Seek medical advice before stopping"
     },
     {
       "id": "NoDriving",
