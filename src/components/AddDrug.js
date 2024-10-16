@@ -97,7 +97,13 @@ function AddDrug({ renderNewDrug }) {
                     <div className="col">
                         Special Instructions
                         <div className="btn-group mt-1">
-                            <button className="btn btn-primary dropdown-toggle" type="button" id="warningDropdown" data-bs-toggle="dropdown">
+                            <button
+                                className="btn btn-primary dropdown-toggle"
+                                type="button"
+                                id="warningDropdown"
+                                data-bs-toggle="dropdown"
+                                data-bs-auto-close="outside"
+                            >
                                 &nbsp;&nbsp;&nbsp;Select All Applicable&nbsp;&nbsp;&nbsp;
                             </button>
                             <div className="dropdown-menu p-2" style={{width: "20rem"}}>

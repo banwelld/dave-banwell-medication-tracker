@@ -3,9 +3,11 @@ import React from 'react';
 function DrugCard({ drug: { imgUrl, brandName, genericName, dailyQty, isOptional, lastDoseTs } }) {
 
     return (
-        <div className="col-3 align-items-center mt-3">
-            <div className="card shadow-sm" style={{width: "12rem"}}>
-                <img src={imgUrl} className="card-img-top" alt={brandName} />
+        <div className="col-3 mt-3">
+            <div className="card shadow-sm mx-auto" style={{width: "14rem"}}>
+                <div className="row align-items-center" style={{height: "14rem"}}>
+                    <img src={imgUrl} className="card-img-top" alt={brandName} />
+                </div>
                 <div className="card-body bg-light">
                     <h5 className="card-title">{brandName}</h5>
                     <h6 className="card-subtitle text-muted">{genericName}</h6>
