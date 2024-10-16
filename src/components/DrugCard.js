@@ -14,7 +14,13 @@ function DrugCard({ updateDrug, drug: { id, imgUrl, brandName, genericName, dail
 
     // update drug data on click
 
-    const takeNowClick = () => updateDrug(id, {inStock: inStockNum - 1});
+    const takeNowClick = () => {
+        if (!inStockNum) {
+            alert("You do not have any of this medication in stock. Please go to the drug's information page to update your stock if you've recently refilled.");
+        } else {
+            updateDrug(id, {inStock: inStockNum - 1});
+        };
+    };
 
     return (
         <div className="col-3 mt-3">
@@ -36,9 +42,9 @@ function DrugCard({ updateDrug, drug: { id, imgUrl, brandName, genericName, dail
                         className="btn btn-primary shadow container"
                         onClick={takeNowClick}
                     >
-                        Take now
+                        Take Now
                     </button>
-                    <a href="http://facebook.com" className="btn btn-secondary mt-3 shadow container">View details</a>
+                    <a href="http://facebook.com" className="btn btn-secondary mt-3 shadow container">View Drug Info</a>
                 </div>
             </div>
         </div>
