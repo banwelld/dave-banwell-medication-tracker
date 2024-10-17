@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-function SearchFilter() {
-  const [nameSearch, setNameSearch] = useState('');
-  const [filter, setFilter] = useState('');
+function SearchFilter({ sort, getSort, filter, getFilter }) {
+  // sort drug list
 
   return (
     <div className='row g-3'>
@@ -10,24 +9,24 @@ function SearchFilter() {
         <div className='row justify-contents-center g-3 mb-2'>
           <div className='col-8'>
             <input
-              id='nameSearch'
+              id='nameFilter'
               type='text'
               className='form-control'
-              value={nameSearch}
-              placeholder='Search by brand or generic name...'
-              onChange={(e) => setNameSearch(e.target.value)}
+              value={filter}
+              placeholder='Filter by brand or generic name...'
+              onChange={(e) => getFilter(e.target.value)}
             />
           </div>
           <div className='col-4'>
             <select
               id='sortSelect'
               className='form-select'
-              value={filter}
-              defaultValue='1'
-              onChange={(e) => setFilter(e.target.value)}
+              value={sort}
+              defaultValue='name'
+              onChange={(e) => getSort(e.target.value)}
             >
-              <option value='1'>Sort by brand name</option>
-              <option value='2'>Sort by days supply</option>
+              <option value='name'>Sort by brand name</option>
+              <option value='supply'>Sort by days supply</option>
             </select>
           </div>
         </div>

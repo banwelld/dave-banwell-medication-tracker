@@ -4,9 +4,11 @@ import SearchFilter from '../components/SearchFilter';
 import AddDrug from '../components/AddDrug';
 
 function Home() {
-  // set state to hold the data for all the drugs in the list
+  // set state to hold drug, sort, search/filter data
 
   const [allDrugData, setAllDrugData] = useState([]);
+  const [nameFilter, setNameFilter] = useState('');
+  const [sortCriteria, setSortCriteria] = useState('name');
 
   // retrieve data from api and set into state
 
@@ -20,6 +22,32 @@ function Home() {
   // trigger fetch of drug data on component mount
 
   useEffect(() => getAllDrugData(), []);
+
+  // sort and filter drug data
+
+  const sortDrugList = (data) => {
+    return data.sort((a, b) => {
+      if (sortCriteria === 'name') {
+        return a.brandName.localeCompare(b.brandName);
+      } else if (sortCriteria === 'supply') {
+        return (
+          parseInt(a.inStock / a.dailyQty) - parseInt(b.inStock / b.dailyQty)
+        );
+      }
+    });
+  };
+
+  const filterDrugList = (data) => {
+    return data.filter(
+      (drug) =>
+        drug.brandName.toLowerCase().includes(nameFilter.toLowerCase()) ||
+        drug.genericName.toLowerCase().includes(nameFilter.toLowerCase())
+    );
+  };
+
+  // combine sort and filter to generate display list
+
+  const displayDrugList = (data) => filterDrugList(sortDrugList(data));
 
   // add drugs from AddDrug module to allDrugData
 
@@ -65,7 +93,12 @@ function Home() {
             data-bs-parent='#homepageAccordion'
           >
             <div className='accordion-body'>
-              <SearchFilter />
+              <SearchFilter
+                sort={sortCriteria}
+                getSort={setSortCriteria}
+                filter={nameFilter}
+                getFilter={setNameFilter}
+              />
             </div>
           </div>
         </div>
@@ -91,7 +124,10 @@ function Home() {
           </div>
         </div>
       </div>
-      <DrugMatrix updateDrug={updateDrug} allDrugData={allDrugData} />
+      <DrugMatrix
+        updateDrug={updateDrug}
+        allDrugData={displayDrugList(allDrugData)}
+      />
     </>
   );
 }
