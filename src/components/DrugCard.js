@@ -42,14 +42,14 @@ function DrugCard({ updateDrug, drug: { id, imgUrl, brandName, genericName, dail
                     <h5 className="card-title">{brandName}</h5>
                     <h6 className="card-subtitle text-muted">{genericName}</h6>
                     <hr />
-                        <p className="list-group-item mt-3 small">{dailyQty} dose(s) daily{isOptional && ", as needed"}</p>
+                        <p className="list-group-item mt-3 small">{dailyQty} dose{dailyQtyNum !== 1 && "s"} daily{isOptional && ", as needed"}</p>
                         <p className="list-group-item small">
                             Remaining Supply:
                             <br />
-                            {inStock} doses ({daysRemaining} days)
+                            {inStock} dose{inStockNum !== 1 && "s"} ({daysRemaining} day{daysRemaining !== 1 && "s"});
                         </p>
                     <button
-                        className="btn btn-primary shadow container"
+                        className="btn btn-dark shadow container"
                         onClick={takeNowClick}
                     >
                         Take Now

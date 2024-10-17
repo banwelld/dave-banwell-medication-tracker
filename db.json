@@ -6,7 +6,7 @@
       "doseVal": "40",
       "dailyQty": "1",
       "fullStomach": true,
-      "inStock": 13,
+      "inStock": 0,
       "imgUrl": "https://vyvansemedication.com/wp-content/uploads/2020/02/40mg-capsule.jpg",
       "id": 4
     },
@@ -17,7 +17,7 @@
       "doseUnits": "4",
       "dailyQty": "3",
       "evenDosing": true,
-      "inStock": 12,
+      "inStock": 11,
       "imgUrl": "https://www.lifestreamrx.com/cdn-cgi/image/quality%3D85/assets/images/73894.jpg",
       "id": 5
     },
@@ -50,6 +50,19 @@
       "inStock": 120,
       "imgUrl": "https://www.dea.gov/sites/default/files/2022-08/30mg%20countefeit%20oxy_front_backside%20w%20watermarkx.jpg",
       "id": 8
+    },
+    {
+      "brandName": "Dayvigo",
+      "genericName": "Lemborexant",
+      "doseVal": "10",
+      "dailyQty": "1",
+      "isOptional": true,
+      "onSleep": true,
+      "causesSleep": true,
+      "NoDriving": true,
+      "inStock": 5,
+      "imgUrl": "https://www.drugs.com/images/pills/fio/ESI04100.JPG",
+      "id": 9
     }
   ],
   "warnings": [
