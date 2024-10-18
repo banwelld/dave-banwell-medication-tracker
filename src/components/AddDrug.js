@@ -187,7 +187,7 @@ function AddDrug({ renderNewDrug }) {
           Special Instructions
           <div className='btn-group mt-1'>
             <button
-              className='btn btn-primary dropdown-toggle'
+              className='btn btn-info dropdown-toggle text-light'
               type='button'
               id='warningDropdown'
               data-bs-toggle='dropdown'
@@ -231,7 +231,7 @@ function AddDrug({ renderNewDrug }) {
       </div>
       <div className='row g-3 mt-3'>
         <div className='col-12'>
-          <button type='submit' className='btn btn-primary'>
+          <button type='submit' className='btn btn-info text-light'>
             Add Medication
           </button>
         </div>

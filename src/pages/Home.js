@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import DrugMatrix from '../components/DrugMatrix';
 import SearchFilter from '../components/SearchFilter';
 import AddDrug from '../components/AddDrug';
+import DrugCard from '../components/DrugCard';
 
 function Home() {
   // set state to hold drug, sort, search/filter data
@@ -23,10 +24,10 @@ function Home() {
 
   useEffect(() => getAllDrugData(), []);
 
-  // sort and filter drug data
+  // sort and filter drug data prior to displaying it
 
-  const sortDrugList = (data) => {
-    return data.sort((a, b) => {
+  const sortDrugList = (drugListData) => {
+    return drugListData.sort((a, b) => {
       if (sortCriteria === 'name') {
         return a.brandName.localeCompare(b.brandName);
       } else if (sortCriteria === 'supply') {
@@ -37,22 +38,33 @@ function Home() {
     });
   };
 
-  const filterDrugList = (data) => {
-    return data.filter(
+  const filterDrugList = (drugListData) => {
+    return drugListData.filter(
       (drug) =>
         drug.brandName.toLowerCase().includes(nameFilter.toLowerCase()) ||
         drug.genericName.toLowerCase().includes(nameFilter.toLowerCase())
     );
   };
 
-  // combine sort and filter to generate display list
+  // serialize sort and filter to generate display list
 
-  const displayDrugList = (data) => filterDrugList(sortDrugList(data));
+  const displayDrugList = (drugListData) =>
+    filterDrugList(sortDrugList(drugListData));
+
+  console.log(displayDrugList);
+
+  // render drug cards for display
+
+  const drugCardList = (drugListData) => {
+    return displayDrugList(drugListData).map((drug) => (
+      <DrugCard key={drug.id} drug={drug} updateDrug={updateDrug} />
+    ));
+  };
 
   // add drugs from AddDrug module to allDrugData
 
-  const renderNewDrug = (drug) =>
-    setAllDrugData((prevData) => [...prevData, drug]);
+  const renderNewDrug = (drugObj) =>
+    setAllDrugData((prevData) => [...prevData, drugObj]);
 
   // send drug update to server
 
@@ -124,10 +136,7 @@ function Home() {
           </div>
         </div>
       </div>
-      <DrugMatrix
-        updateDrug={updateDrug}
-        allDrugData={displayDrugList(allDrugData)}
-      />
+      <div className='row g-3'>{drugCardList(allDrugData)}</div>
     </>
   );
 }
