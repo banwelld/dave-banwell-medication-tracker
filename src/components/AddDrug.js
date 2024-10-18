@@ -1,10 +1,35 @@
 import React, { useState, useEffect } from 'react';
 
 function AddDrug({ renderNewDrug }) {
+  // begin with empty drug object
+
+  const emptyDrugObj = {
+    brandName: '',
+    genericName: '',
+    doseVal: '',
+    doseUnits: '',
+    dailyQty: '',
+    isOptional: false,
+    withFood: false,
+    withWater: false,
+    fullStomach: false,
+    emptyStomach: false,
+    onSleep: false,
+    onWake: false,
+    avoidAlcohol: false,
+    causesSleep: false,
+    evenDosing: false,
+    takeAll: false,
+    dontStop: false,
+    NoDriving: false,
+    inStock: '',
+    imgUrl: '',
+  };
+
   // state variables for form inputs
 
   const [warnings, setWarnings] = useState([]);
-  const [newDrug, setNewDrug] = useState([]);
+  const [newDrug, setNewDrug] = useState(emptyDrugObj);
 
   // fetch warnings from API
 
@@ -19,7 +44,7 @@ function AddDrug({ renderNewDrug }) {
 
   useEffect(() => getWarnings(), []);
 
-  // set form data into state
+  // event listener to set new drug data into state
 
   const handleInfoChange = (e) => {
     const { id, type, value, checked } = e.target;
@@ -47,9 +72,10 @@ function AddDrug({ renderNewDrug }) {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     addNewDrug();
+    setNewDrug(emptyDrugObj);
   };
 
-  // minor components
+  // checkbox component to propagate warning list
 
   const CheckboxElement = ({ id, labelText }) => {
     return (
@@ -68,7 +94,7 @@ function AddDrug({ renderNewDrug }) {
     );
   };
 
-  // function to create a list of warning checkboxes for the dropdown
+  // create a list of warning checkboxes for the dropdown
 
   const warningList = () => {
     return warnings.map((warning) => (
@@ -91,6 +117,7 @@ function AddDrug({ renderNewDrug }) {
             type='text'
             className='form-control'
             id='brandName'
+            value={newDrug.brandName}
             onChange={handleInfoChange}
           />
           <div id='brandNameHelp' className='form-text'>
@@ -105,6 +132,7 @@ function AddDrug({ renderNewDrug }) {
             type='text'
             className='form-control'
             id='genericName'
+            value={newDrug.genericName}
             onChange={handleInfoChange}
           />
           <div id='genericNameHelp' className='form-text'>
@@ -120,6 +148,7 @@ function AddDrug({ renderNewDrug }) {
             step='1'
             className='form-control'
             id='doseVal'
+            value={newDrug.doseVal}
             onChange={handleInfoChange}
           />
         </div>
@@ -130,13 +159,15 @@ function AddDrug({ renderNewDrug }) {
           <select
             id='doseUnits'
             className='form-select'
-            defaultValue='1'
+            defaultValue='0'
+            value={newDrug.doseUnits}
             onChange={handleInfoChange}
           >
-            <option value='1'>mg</option>
-            <option value='2'>ug</option>
-            <option value='3'>ml</option>
-            <option value='4'>IU</option>
+            <option value='0'></option>
+            <option value='mg'>mg</option>
+            <option value='ug'>ug</option>
+            <option value='ml'>ml</option>
+            <option value='IU'>IU</option>
           </select>
         </div>
         <div className='col'>
@@ -148,6 +179,7 @@ function AddDrug({ renderNewDrug }) {
             step='1'
             className='form-control'
             id='dailyQty'
+            value={newDrug.dailyQty}
             onChange={handleInfoChange}
           />
         </div>
@@ -179,6 +211,7 @@ function AddDrug({ renderNewDrug }) {
             step='1'
             className='form-control'
             id='inStock'
+            value={newDrug.inStock}
             onChange={handleInfoChange}
           />
         </div>
@@ -190,6 +223,7 @@ function AddDrug({ renderNewDrug }) {
             type='text'
             className='form-control'
             id='imgUrl'
+            value={newDrug.imgUrl}
             placeholder='E.g., http://www.image.com/image.jpg'
             onChange={handleInfoChange}
           />
