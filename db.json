@@ -68,29 +68,6 @@
       "inStock": "500",
       "imgUrl": "https://www.progressivenutritional.com/cdn/shop/files/4bf5948375834948a6958b45bd518a863e908c792a62e0da3d6ac7a84966ef93.png",
       "id": 3
-    },
-    {
-      "brandName": "",
-      "genericName": "",
-      "doseVal": "",
-      "doseUnits": "",
-      "dailyQty": "",
-      "isOptional": false,
-      "withFood": false,
-      "withWater": false,
-      "fullStomach": false,
-      "emptyStomach": false,
-      "onSleep": false,
-      "onWake": false,
-      "avoidAlcohol": false,
-      "causesSleep": false,
-      "evenDosing": false,
-      "takeAll": false,
-      "dontStop": false,
-      "NoDriving": false,
-      "inStock": "",
-      "imgUrl": "",
-      "id": 4
     }
   ],
   "warnings": [

@@ -3,15 +3,10 @@ import { NavLink } from 'react-router-dom';
 
 function NavBar() {
   return (
-    <nav className='navbar navbar-expand-sm navbar-dark bg-info'>
+    <nav className='navbar navbar-expand-lg navbar-dark bg-primary'>
       <div className='container-fluid'>
         <NavLink className='navbar-brand' to='/'>
-          <img
-            src='/images/MedTrackerIcon.png'
-            alt=''
-            style={{ width: '30px' }}
-            class='d-inline-block align-text-top'
-          />
+          Medication Tracker
         </NavLink>
         <button
           className='navbar-toggler'
@@ -27,16 +22,12 @@ function NavBar() {
         <div className='collapse navbar-collapse' id='navbarSupportedContent'>
           <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
             <li className='nav-item'>
-              <NavLink
-                className='nav-link fs-4 active'
-                aria-current='page'
-                to='/'
-              >
+              <NavLink className='nav-link active' aria-current='page' to='/'>
                 Home
               </NavLink>
             </li>
             <li className='nav-item'>
-              <NavLink className='nav-link fs-4' to='/DrugInfo'>
+              <NavLink className='nav-link' to='/DrugInfo'>
                 Drug Info
               </NavLink>
             </li>
