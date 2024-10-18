@@ -5,11 +5,15 @@ function Header() {
   return (
     <>
       <div className='container text-center mb-4'>
-        <img
-          src='../../public/MedTrackerIcon.png'
-          alt='Medication Tracker Icon'
-        />
-        <h1 className='mt-2'>My Medication Tracker</h1>
+        <div class='d-flex align-items-center justify-content-center gap-3 mt-3 mb-3'>
+          <img
+            src='/images/MedTrackerIcon.png'
+            alt='Medication Tracker Icon'
+            style={{ width: '4rem' }}
+            className=''
+          />
+          <h1 className='text-secondary'>MedTracker</h1>
+        </div>
       </div>
       <NavBar />
     </>

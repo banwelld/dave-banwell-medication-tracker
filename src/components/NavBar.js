@@ -3,10 +3,17 @@ import { NavLink } from 'react-router-dom';
 
 function NavBar() {
   return (
-    <nav className='navbar navbar-expand-lg navbar-dark bg-primary'>
+    <nav
+      className='navbar navbar-expand-lg navbar-dark fs-4'
+      style={{ backgroundColor: '#54B4D3' }}
+    >
       <div className='container-fluid'>
         <NavLink className='navbar-brand' to='/'>
-          Medication Tracker
+          <img
+            src='/images/MedTrackerIcon.png'
+            alt='MedTracker icon'
+            style={{ width: '2rem' }}
+          />
         </NavLink>
         <button
           className='navbar-toggler'

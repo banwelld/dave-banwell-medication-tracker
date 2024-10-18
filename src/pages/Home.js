@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import DrugMatrix from '../components/DrugMatrix';
+import DrugCardMatrix from '../components/DrugCardMatrix';
 import SearchFilter from '../components/SearchFilter';
 import AddDrug from '../components/AddDrug';
 
@@ -25,8 +25,8 @@ function Home() {
 
   // sort and filter drug data
 
-  const sortDrugList = (data) => {
-    return data.sort((a, b) => {
+  const sortDrugList = (drugList) => {
+    return drugList.sort((a, b) => {
       if (sortCriteria === 'name') {
         return a.brandName.localeCompare(b.brandName);
       } else if (sortCriteria === 'supply') {
@@ -37,8 +37,8 @@ function Home() {
     });
   };
 
-  const filterDrugList = (data) => {
-    return data.filter(
+  const filterDrugList = (drugList) => {
+    return drugList.filter(
       (drug) =>
         drug.brandName.toLowerCase().includes(nameFilter.toLowerCase()) ||
         drug.genericName.toLowerCase().includes(nameFilter.toLowerCase())
@@ -47,12 +47,12 @@ function Home() {
 
   // combine sort and filter to generate display list
 
-  const displayDrugList = (data) => filterDrugList(sortDrugList(data));
+  const displayDrugList = (drugList) => filterDrugList(sortDrugList(drugList));
 
   // add drugs from AddDrug module to allDrugData
 
-  const renderNewDrug = (drug) =>
-    setAllDrugData((prevData) => [...prevData, drug]);
+  const renderNewDrug = (drugObj) =>
+    setAllDrugData((prevData) => [...prevData, drugObj]);
 
   // send drug update to server
 
@@ -79,7 +79,8 @@ function Home() {
         <div className='accordion-item'>
           <h2 className='accordion-header' id='accordionSearchHeader'>
             <button
-              className='accordion-button text-primary collapsed'
+              className='accordion-button text-light collapsed'
+              style={{ backgroundColor: '#54B4D3', outline: 'none' }}
               type='button'
               data-bs-toggle='collapse'
               data-bs-target='#collapseOne'
@@ -105,7 +106,8 @@ function Home() {
         <div className='accordion-item'>
           <h2 className='accordion-header' id='accordionAddDrugHeader'>
             <button
-              className='accordion-button text-primary collapsed'
+              className='accordion-button text-light collapsed'
+              style={{ backgroundColor: '#54B4D3', outline: 'none' }}
               type='button'
               data-bs-toggle='collapse'
               data-bs-target='#collapseTwo'
@@ -124,7 +126,7 @@ function Home() {
           </div>
         </div>
       </div>
-      <DrugMatrix
+      <DrugCardMatrix
         updateDrug={updateDrug}
         allDrugData={displayDrugList(allDrugData)}
       />
