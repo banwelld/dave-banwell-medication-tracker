@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useOutletContext } from 'react-router-dom';
 import DrugCardMatrix from '../components/DrugCardMatrix';
 import SearchFilter from '../components/SearchFilter';
 import AddDrug from '../components/AddDrug';
@@ -9,6 +10,10 @@ function Home() {
   const [allDrugData, setAllDrugData] = useState([]);
   const [nameFilter, setNameFilter] = useState('');
   const [sortCriteria, setSortCriteria] = useState('name');
+
+  // get drug warnings from context
+
+  const drugWarnings = useOutletContext();
 
   // retrieve data from api and set into state
 
@@ -21,7 +26,9 @@ function Home() {
 
   // trigger fetch of drug data on component mount
 
-  useEffect(() => getAllDrugData(), []);
+  useEffect(() => {
+    getAllDrugData();
+  }, []);
 
   // sort and filter drug data
 
@@ -121,7 +128,10 @@ function Home() {
             data-bs-parent='#homepageAccordion'
           >
             <div className='accordion-body'>
-              <AddDrug renderNewDrug={renderNewDrug} />
+              <AddDrug
+                renderNewDrug={renderNewDrug}
+                drugWarnings={drugWarnings}
+              />
             </div>
           </div>
         </div>

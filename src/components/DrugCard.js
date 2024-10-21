@@ -47,7 +47,7 @@ function DrugCard({
   };
 
   return (
-    <div className='col-3 mt-3 mb-3'>
+    <article className='col-3 mt-3 mb-3'>
       <div className={classNameWarn()} style={{ width: '14rem' }}>
         <div className='row align-items-center p-1' style={{ height: '14rem' }}>
           <img src={imgUrl} className='card-img-top' alt={brandName} />
@@ -83,7 +83,7 @@ function DrugCard({
           </Link>
         </div>
       </div>
-    </div>
+    </article>
   );
 }
 

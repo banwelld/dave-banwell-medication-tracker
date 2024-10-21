@@ -11,9 +11,8 @@ const routes = [
     errorElement: <ErrorPage />,
     children: [
       { path: '/', element: <Home /> },
-      { path: '/Home', element: <Home /> },
-      { path: '/DrugInfo', element: <DrugInfo /> },
-      { path: '/DrugDiary', element: <DrugDiary /> },
+      { path: '/DrugInfo/:id', element: <DrugInfo /> },
+      { path: '/DrugDiary/', element: <DrugDiary /> },
     ],
   },
 ];

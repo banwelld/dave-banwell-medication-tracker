@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function AddDrug({ renderNewDrug }) {
+function AddDrug({ renderNewDrug, drugWarnings }) {
   // begin with empty drug object
 
   const emptyDrugObj = {
@@ -26,23 +26,9 @@ function AddDrug({ renderNewDrug }) {
     imgUrl: '',
   };
 
-  // state variables for form inputs
+  // state variables
 
-  const [warnings, setWarnings] = useState([]);
   const [newDrug, setNewDrug] = useState(emptyDrugObj);
-
-  // fetch warnings from API
-
-  const getWarnings = () => {
-    fetch('http://localhost:6001/warnings')
-      .then((response) => response.json())
-      .then((data) => setWarnings(data))
-      .catch((error) => console.log(error));
-  };
-
-  // load warnings into state on component mount
-
-  useEffect(() => getWarnings(), []);
 
   // event listener to set new drug data into state
 
@@ -67,7 +53,7 @@ function AddDrug({ renderNewDrug }) {
       .catch((error) => console.log(error));
   };
 
-  // prevent form default behaviour
+  // submit new drug data
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -94,9 +80,9 @@ function AddDrug({ renderNewDrug }) {
     );
   };
 
-  // create a list of warning checkboxes for the dropdown
+  // list the warning checkboxes for the dropdown
 
-  const warningList = () => {
+  const warningList = (warnings) => {
     return warnings.map((warning) => (
       <CheckboxElement
         key={warning.id}
@@ -105,6 +91,8 @@ function AddDrug({ renderNewDrug }) {
       />
     ));
   };
+
+  // render the add drug component
 
   return (
     <form className='p-3' onSubmit={handleFormSubmit}>
@@ -197,7 +185,7 @@ function AddDrug({ renderNewDrug }) {
               &nbsp;&nbsp;&nbsp;Select All Applicable&nbsp;&nbsp;&nbsp;
             </button>
             <div className='dropdown-menu p-2' style={{ width: '20rem' }}>
-              {warningList()}
+              {warningList(drugWarnings)}
             </div>
           </div>
         </div>

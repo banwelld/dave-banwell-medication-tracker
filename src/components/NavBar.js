@@ -12,7 +12,7 @@ function NavBar() {
           <img
             src='/images/MedTrackerIcon.png'
             alt='MedTracker icon'
-            style={{ width: '2rem' }}
+            style={{ width: '1rem' }}
           />
         </NavLink>
         <button
