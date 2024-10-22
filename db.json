@@ -12,7 +12,7 @@
       "fullStomach": true,
       "emptyStomach": false,
       "onSleep": false,
-      "onWake": false,
+      "onWake": true,
       "avoidAlcohol": false,
       "causesSleep": false,
       "evenDosing": false,

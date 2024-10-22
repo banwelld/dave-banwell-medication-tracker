@@ -53,23 +53,16 @@ function DrugCard({
           <img src={imgUrl} className='card-img-top' alt={brandName} />
         </div>
         <div className='card-body'>
-          <h5 className='card-title'>
-            {brandName}{' '}
-            <small>
-              {doseVal} {doseUnits}
-            </small>
-          </h5>
-          <h6 className='card-subtitle text-muted'>{genericName}</h6>
+          <h5 className='card-title'>{brandName}</h5>
           <hr />
           <p className='list-group-item mt-3 small'>
             {dailyQty} dose{dailyQtyNum !== 1 && 's'} daily
             {isOptional && ', as needed'}
           </p>
           <p className='list-group-item small'>
-            Remaining Supply:
+            Day's Supply Remaining:
             <br />
-            {inStock} dose{inStockNum !== 1 && 's'} ({daysRemaining} day
-            {daysRemaining !== 1 && 's'});
+            {daysRemaining} day{daysRemaining !== 1 && 's'}
           </p>
           <button
             className='btn btn-dark shadow container'

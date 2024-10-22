@@ -70,7 +70,9 @@ function DrugInfo() {
         {parseInt(drug.inStock / drug.dailyQty)} day
         {parseInt(drug.inStock / drug.dailyQty) !== 1 && 's'})
       </p>
-      <h3>Warnings and Additional Instructions</h3>
+      <h4 className='text-danger'>
+        {warningList.length > 0 && 'Warnings and Additional Instructions'}
+      </h4>
       <ul>{warningList}</ul>
     </div>
   );

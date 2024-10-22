@@ -2,7 +2,7 @@ import App from './pages/App';
 import Home from './pages/Home';
 import DrugInfo from './pages/DrugInfo';
 import ErrorPage from './pages/ErrorPage';
-import DrugDiary from './pages/DrugDiary';
+import PharmacyReceipts from './pages/PharmacyReceipts';
 
 const routes = [
   {
@@ -12,7 +12,7 @@ const routes = [
     children: [
       { path: '/', element: <Home /> },
       { path: '/DrugInfo/:id', element: <DrugInfo /> },
-      { path: '/DrugDiary/', element: <DrugDiary /> },
+      { path: '/PharmacyReceipts/', element: <PharmacyReceipts /> },
     ],
   },
 ];

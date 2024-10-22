@@ -34,8 +34,8 @@ function NavBar() {
               </NavLink>
             </li>
             <li className='nav-item'>
-              <NavLink className='nav-link' to='/DrugDiary'>
-                Drug Diary
+              <NavLink className='nav-link' to='/PharmacyReceipts'>
+                Pharmacy Receipts
               </NavLink>
             </li>
           </ul>

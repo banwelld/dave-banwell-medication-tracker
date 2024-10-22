@@ -136,6 +136,11 @@ function Home() {
           </div>
         </div>
       </div>
+      <div className='row text-center align-items-center justify-content-center m-4'>
+        <h4 className='text-secondary'>Legend</h4>
+        <div className='col-2 bg-warning text-dark'>Refill Soon</div>
+        <div className='col-2 bg-danger text-light'>Refill Now!</div>
+      </div>
       <DrugCardMatrix
         updateDrug={updateDrug}
         allDrugData={displayDrugList(allDrugData)}
