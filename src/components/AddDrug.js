@@ -147,7 +147,6 @@ function AddDrug({ renderNewDrug, drugWarnings }) {
           <select
             id='doseUnits'
             className='form-select'
-            defaultValue='0'
             value={newDrug.doseUnits}
             onChange={handleInfoChange}
           >

@@ -22,7 +22,6 @@ function SearchFilter({ sort, getSort, filter, getFilter }) {
               id='sortSelect'
               className='form-select'
               value={sort}
-              defaultValue='name'
               onChange={(e) => getSort(e.target.value)}
             >
               <option value='name'>Sort by brand name</option>
