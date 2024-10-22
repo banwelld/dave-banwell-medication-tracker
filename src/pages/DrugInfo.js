@@ -10,8 +10,6 @@ function DrugInfo() {
 
   const drugWarnings = useOutletContext();
 
-  console.log(drugWarnings);
-
   // get the parameter id
 
   const params = useParams();
@@ -34,13 +32,27 @@ function DrugInfo() {
 
   // get the drug's warnings and instructions
 
-  const warningIdList = Object.keys(drug).filter((key) => drug[key] === true);
+  const warningIdList = Object.keys(drug).filter(
+    (key) => drug[key] === true && key !== 'isOptional'
+  );
+
+  const warningList = warningIdList.map((warningId) => {
+    const displayWarning = drugWarnings.find(
+      (warning) => warning.id === warningId
+    );
+    return <li key={displayWarning.id}>{displayWarning.labelText}</li>;
+  });
 
   // render the drug info
 
   return (
     <div>
-      <img src={drug.imgUrl} alt={drug.brandName + 'image'} width='200px' />
+      <img
+        src={drug.imgUrl}
+        alt={drug.brandName + 'image'}
+        width='200px'
+        className='mt-3 mb-3'
+      />
       <h2>
         {drug.brandName}
         <small>
@@ -48,14 +60,18 @@ function DrugInfo() {
           ({drug.doseVal} {drug.doseUnits})
         </small>
       </h2>
-      <h3>{drug.genericName}</h3>
+      <h3 className='text-secondary'>{drug.genericName}</h3>
       <h5>
         Take {drug.dailyQty} time{parseInt(drug.dailyQty) > 1 && 's'}, daily
         {drug.isOptional && ', as needed'}
       </h5>
-      <p>Quantity Onhand: {drug.inStock}</p>
+      <p>
+        Personal Supply: {drug.inStock} dose{drug.inStock != 1 && 's'} (
+        {parseInt(drug.inStock / drug.dailyQty)} day
+        {parseInt(drug.inStock / drug.dailyQty) !== 1 && 's'})
+      </p>
       <h3>Warnings and Additional Instructions</h3>
-      <ul>{warningList(drug)}</ul>
+      <ul>{warningList}</ul>
     </div>
   );
 }

@@ -38,11 +38,6 @@ function NavBar() {
                 Drug Diary
               </NavLink>
             </li>
-            <li className='nav-item'>
-              <NavLink className='nav-link' to='/DrugInfo'>
-                Drug Info
-              </NavLink>
-            </li>
           </ul>
         </div>
       </div>

@@ -54,8 +54,10 @@ function DrugCard({
         </div>
         <div className='card-body'>
           <h5 className='card-title'>
-            {brandName} {doseVal}
-            {doseUnits}
+            {brandName}{' '}
+            <small>
+              {doseVal} {doseUnits}
+            </small>
           </h5>
           <h6 className='card-subtitle text-muted'>{genericName}</h6>
           <hr />
