@@ -65,7 +65,7 @@ function DrugCard({
             {daysRemaining} day{daysRemaining !== 1 && 's'}
           </p>
           <button
-            className='btn btn-dark shadow container'
+            className='btn bg-blue shadow container'
             onClick={takeNowClick}
           >
             Take Now

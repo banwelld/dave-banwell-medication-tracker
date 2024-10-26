@@ -13,8 +13,8 @@ function ErrorPage() {
           style={{ height: '10rem' }}
         />
       </div>
-      <div className='col-6 justify-content-center align-items-center aligh-text-center'>
-        <h1>Oops, something went wrong...</h1>
+      <div className='col-6 justify-content-center align-items-center align-text-center'>
+        <h1 className='text-blue'>Oops, something went wrong...</h1>
         <h4 className='text-muted'>
           The page you're looking for doesn't exist.
         </h4>

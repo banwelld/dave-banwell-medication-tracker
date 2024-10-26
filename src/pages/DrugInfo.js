@@ -53,7 +53,7 @@ function DrugInfo() {
         width='200px'
         className='mt-3 mb-3'
       />
-      <h2>
+      <h2 className='text-blue'>
         {drug.brandName}
         <small>
           {' '}
@@ -66,7 +66,7 @@ function DrugInfo() {
         {drug.isOptional && ', as needed'}
       </h5>
       <p>
-        Personal Supply: {drug.inStock} dose{drug.inStock != 1 && 's'} (
+        Personal Supply: {drug.inStock} dose{drug.inStock !== 1 && 's'} (
         {parseInt(drug.inStock / drug.dailyQty)} day
         {parseInt(drug.inStock / drug.dailyQty) !== 1 && 's'})
       </p>

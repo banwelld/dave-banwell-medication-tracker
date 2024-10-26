@@ -54,7 +54,7 @@ function Home() {
 
   // combine sort and filter to generate display list
 
-  const displayDrugList = (drugList) => filterDrugList(sortDrugList(drugList));
+  const displayDrugList = filterDrugList(sortDrugList(allDrugData));
 
   // add drugs from AddDrug module to allDrugData
 
@@ -87,7 +87,6 @@ function Home() {
           <h2 className='accordion-header' id='accordionSearchHeader'>
             <button
               className='accordion-button text-light collapsed'
-              style={{ backgroundColor: '#54B4D3', outline: 'none' }}
               type='button'
               data-bs-toggle='collapse'
               data-bs-target='#collapseOne'
@@ -114,7 +113,6 @@ function Home() {
           <h2 className='accordion-header' id='accordionAddDrugHeader'>
             <button
               className='accordion-button text-light collapsed'
-              style={{ backgroundColor: '#54B4D3', outline: 'none' }}
               type='button'
               data-bs-toggle='collapse'
               data-bs-target='#collapseTwo'
@@ -141,10 +139,7 @@ function Home() {
         <div className='col-2 bg-warning text-dark'>Refill Soon</div>
         <div className='col-2 bg-danger text-light'>Refill Now!</div>
       </div>
-      <DrugCardMatrix
-        updateDrug={updateDrug}
-        allDrugData={displayDrugList(allDrugData)}
-      />
+      <DrugCardMatrix updateDrug={updateDrug} allDrugData={displayDrugList} />
     </>
   );
 }

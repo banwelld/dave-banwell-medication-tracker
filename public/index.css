@@ -1,0 +1,31 @@
+:root {
+    --mt-blue: #54B4D3;
+    --mt-blue-hover: #50ABC8;
+    --mt-blue-shadow: rgba(84, 180, 211, 0.5);
+}
+
+.accordion-button {
+    background-color: var(--mt-blue) !important;
+}
+
+.accordion-button:focus {
+    outline: none !important;
+    border: none !important;
+    box-shadow: 0 0 0 4px var(--mt-blue-shadow) !important;
+}
+
+.accordion-button:hover {
+    background-color: var(--mt-blue-hover) !important;
+}
+
+.navbar {
+    background-color: var(--mt-blue);
+}
+
+.text-blue {
+    color: var(--mt-blue) !important;
+}
+
+.bg-blue {
+    background-color: var(--mt-blue) !important;
+}

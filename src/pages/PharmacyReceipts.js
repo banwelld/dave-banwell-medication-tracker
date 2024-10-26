@@ -1,6 +1,4 @@
-import React from 'react';
-
-function DrugDiary(state) {
+function DrugDiary() {
   return (
     <div className='row m-3 align-items-center justify-content-center'>
       <div className='col-6'>
