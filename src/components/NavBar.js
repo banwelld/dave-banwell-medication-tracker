@@ -8,8 +8,8 @@ function NavBar() {
         <NavLink className='navbar-brand' to='/'>
           <img
             src='/images/MedTrackerIcon.png'
+            className='mt-icon-sm'
             alt='MedTracker icon'
-            style={{ width: '1rem' }}
           />
         </NavLink>
         <button

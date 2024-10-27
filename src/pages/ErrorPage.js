@@ -2,15 +2,12 @@ import React from 'react';
 
 function ErrorPage() {
   return (
-    <div
-      className='row justify-content-center align-items-center align-text-center m-3'
-      style={{ height: '100vh' }}
-    >
+    <div className='row err-pg-container justify-content-center align-items-center align-text-center m-3'>
       <div className='col-2'>
         <img
           src='/images/MedTrackerIcon.png'
+          className='mt-icon-lg'
           alt='MedTracker Icon'
-          style={{ height: '10rem' }}
         />
       </div>
       <div className='col-6 justify-content-center align-items-center align-text-center'>

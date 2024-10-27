@@ -4,7 +4,7 @@ import { useParams, useOutletContext } from 'react-router-dom';
 function DrugInfo() {
   // set state variables to hold drug info
 
-  const [drug, setDrug] = useState({});
+  const [drugInfo, setDrugInfo] = useState({});
 
   // get drug warnings from context
 
@@ -20,7 +20,7 @@ function DrugInfo() {
   const getDrug = (id) => {
     fetch(`http://localhost:6001/medications/${id}`)
       .then((response) => response.json())
-      .then((data) => setDrug(data))
+      .then((data) => setDrugInfo(data))
       .catch((error) => console.log(error));
   };
 
@@ -32,8 +32,8 @@ function DrugInfo() {
 
   // get the drug's warnings and instructions
 
-  const warningIdList = Object.keys(drug).filter(
-    (key) => drug[key] === true && key !== 'isOptional'
+  const warningIdList = Object.keys(drugInfo).filter(
+    (key) => drugInfo[key] === true && key !== 'isOptional'
   );
 
   const warningList = warningIdList.map((warningId) => {
@@ -48,27 +48,29 @@ function DrugInfo() {
   return (
     <div>
       <img
-        src={drug.imgUrl}
-        alt={drug.brandName + 'image'}
+        src={drugInfo.imgUrl}
+        alt={drugInfo.brandName + 'image'}
         width='200px'
         className='mt-3 mb-3'
       />
       <h2 className='text-blue'>
-        {drug.brandName}
+        {drugInfo.brandName}
         <small>
           {' '}
-          ({drug.doseVal} {drug.doseUnits})
+          ({drugInfo.doseVal} {drugInfo.doseUnits})
         </small>
       </h2>
-      <h3 className='text-secondary'>{drug.genericName}</h3>
+      <h3 className='text-secondary'>{drugInfo.genericName}</h3>
       <h5>
-        Take {drug.dailyQty} time{parseInt(drug.dailyQty) > 1 && 's'}, daily
-        {drug.isOptional && ', as needed'}
+        Take {drugInfo.dailyQty} time{parseInt(drugInfo.dailyQty) > 1 && 's'},
+        daily
+        {drugInfo.isOptional && ', as needed'}
       </h5>
       <p>
-        Personal Supply: {drug.inStock} dose{drug.inStock !== 1 && 's'} (
-        {parseInt(drug.inStock / drug.dailyQty)} day
-        {parseInt(drug.inStock / drug.dailyQty) !== 1 && 's'})
+        Personal Supply: {drugInfo.qtyInStock} dose
+        {drugInfo.qtyInStock !== 1 && 's'} (
+        {parseInt(drugInfo.qtyInStock / drugInfo.dailyQty)} day
+        {parseInt(drugInfo.qtyInStock / drugInfo.dailyQty) !== 1 && 's'})
       </p>
       <h4 className='text-danger'>
         {warningList.length > 0 && 'Warnings and Additional Instructions'}

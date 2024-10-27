@@ -11,15 +11,15 @@ function DrugCard({
     doseVal,
     doseUnits,
     dailyQty,
-    inStock,
+    qtyInStock,
     isOptional,
   },
 }) {
   // determine if refill needed
 
-  const inStockNum = parseInt(inStock);
+  const qtyInStockNum = parseInt(qtyInStock);
   const dailyQtyNum = parseInt(dailyQty);
-  const daysRemaining = parseInt(inStockNum / dailyQtyNum);
+  const daysRemaining = parseInt(qtyInStockNum / dailyQtyNum);
 
   // change card background to indicate low or no stock
 
@@ -37,12 +37,12 @@ function DrugCard({
   // update drug data on click
 
   const takeNowClick = () => {
-    if (!inStockNum) {
+    if (!qtyInStockNum) {
       alert(
         "You do not have any of this medication in stock. Please visit the drug's info page to update your stock if you've refilled it."
       );
     } else {
-      updateDrug(id, { inStock: inStockNum - 1 });
+      updateDrug(id, { inStock: qtyInStockNum - 1 });
     }
   };
 

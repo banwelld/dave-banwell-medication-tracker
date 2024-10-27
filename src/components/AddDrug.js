@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 function AddDrug({ renderNewDrug, drugWarnings }) {
   // begin with empty drug object
@@ -22,7 +22,7 @@ function AddDrug({ renderNewDrug, drugWarnings }) {
     takeAll: false,
     dontStop: false,
     NoDriving: false,
-    inStock: '',
+    qtyInStock: '',
     imgUrl: '',
   };
 
@@ -82,15 +82,13 @@ function AddDrug({ renderNewDrug, drugWarnings }) {
 
   // list the warning checkboxes for the dropdown
 
-  const warningList = (warnings) => {
-    return warnings.map((warning) => (
-      <CheckboxElement
-        key={warning.id}
-        id={warning.id}
-        labelText={warning.labelText}
-      />
-    ));
-  };
+  const warningList = drugWarnings.map((warning) => (
+    <CheckboxElement
+      key={warning.id}
+      id={warning.id}
+      labelText={warning.labelText}
+    />
+  ));
 
   // render the add drug component
 
@@ -174,8 +172,7 @@ function AddDrug({ renderNewDrug, drugWarnings }) {
           Special Instructions
           <div className='btn-group mt-1'>
             <button
-              className='btn text-light dropdown-toggle'
-              style={{ backgroundColor: '#54B4D3' }}
+              className='btn text-light dropdown-toggle bg-blue'
               type='button'
               id='warningDropdown'
               data-bs-toggle='dropdown'
@@ -184,7 +181,7 @@ function AddDrug({ renderNewDrug, drugWarnings }) {
               &nbsp;&nbsp;&nbsp;Select All Applicable&nbsp;&nbsp;&nbsp;
             </button>
             <div className='dropdown-menu p-2' style={{ width: '20rem' }}>
-              {warningList(drugWarnings)}
+              {warningList}
             </div>
           </div>
         </div>
@@ -199,7 +196,7 @@ function AddDrug({ renderNewDrug, drugWarnings }) {
             step='1'
             className='form-control'
             id='inStock'
-            value={newDrug.inStock}
+            value={newDrug.qtyInStock}
             onChange={handleInfoChange}
           />
         </div>
@@ -219,11 +216,7 @@ function AddDrug({ renderNewDrug, drugWarnings }) {
       </div>
       <div className='row g-3 mt-3'>
         <div className='col-12'>
-          <button
-            type='submit'
-            className='btn text-light'
-            style={{ backgroundColor: '#54B4D3' }}
-          >
+          <button type='submit' className='btn text-light bg-blue'>
             Add Medication
           </button>
         </div>

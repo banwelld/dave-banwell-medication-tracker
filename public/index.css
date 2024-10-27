@@ -29,3 +29,15 @@
 .bg-blue {
     background-color: var(--mt-blue) !important;
 }
+
+.mt-icon-lg {
+    height: 10rem;
+}
+
+.mt-icon-sm {
+    width: 1rem;
+}
+
+.err-pg-container {
+    height: 100vh;
+}
