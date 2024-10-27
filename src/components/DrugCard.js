@@ -26,11 +26,11 @@ function DrugCard({
   const classNameWarn = () => {
     switch (true) {
       case daysRemaining === 0:
-        return 'card shadow mx-auto bg-danger';
+        return 'card shadow mx-auto width-14 bg-danger';
       case daysRemaining <= 5:
-        return 'card shadow mx-auto bg-warning';
+        return 'card shadow mx-auto width-14 bg-warning';
       default:
-        return 'card shadow mx-auto bg-light';
+        return 'card shadow mx-auto width-14 bg-light';
     }
   };
 
@@ -48,19 +48,20 @@ function DrugCard({
 
   return (
     <article className='col-3 mt-3 mb-3'>
-      <div className={classNameWarn()} style={{ width: '14rem' }}>
-        <div className='row align-items-center p-1' style={{ height: '14rem' }}>
+      <div className={classNameWarn()}>
+        <div className='row align-items-center p-1 height-14'>
           <img src={imgUrl} className='card-img-top' alt={brandName} />
         </div>
         <div className='card-body'>
-          <h5 className='card-title'>{brandName}</h5>
+          <h5 className='card-title fw-semibold'>{brandName}</h5>
+          <span className='tiny-text text-secondary'>{genericName}</span>
           <hr />
           <p className='list-group-item mt-3 small'>
             {dailyQty} dose{dailyQtyNum !== 1 && 's'} daily
             {isOptional && ', as needed'}
           </p>
           <p className='list-group-item small'>
-            Day's Supply Remaining:
+            Supply Remaining:
             <br />
             {daysRemaining} day{daysRemaining !== 1 && 's'}
           </p>
