@@ -1,7 +1,12 @@
 import React from 'react';
 
-function SearchFilter({ sort, getSort, filter, getFilter }) {
-  // sort drug list
+function SearchFilter({
+  sortCriteria,
+  setSortCriteria,
+  nameFilter,
+  setNameFilter,
+}) {
+  // search/filter jsx code
 
   return (
     <div className='row g-3'>
@@ -12,17 +17,17 @@ function SearchFilter({ sort, getSort, filter, getFilter }) {
               id='nameFilter'
               type='text'
               className='form-control'
-              value={filter}
+              value={nameFilter}
               placeholder='Filter by brand or generic name...'
-              onChange={(e) => getFilter(e.target.value)}
+              onChange={(e) => setNameFilter(e.target.value)}
             />
           </div>
           <div className='col-4'>
             <select
               id='sortSelect'
               className='form-select'
-              value={sort}
-              onChange={(e) => getSort(e.target.value)}
+              value={sortCriteria}
+              onChange={(e) => setSortCriteria(e.target.value)}
             >
               <option value='name'>Sort by brand name</option>
               <option value='supply'>Sort by days supply</option>

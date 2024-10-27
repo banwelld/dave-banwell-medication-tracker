@@ -30,31 +30,38 @@ function Home() {
     getAllDrugData();
   }, []);
 
-  // sort and filter drug data
+  // declare sort callback functions
 
-  const sortDrugList = (drugList) => {
-    return drugList.sort((a, b) => {
-      if (sortCriteria === 'name') {
-        return a.brandName.localeCompare(b.brandName);
-      } else if (sortCriteria === 'supply') {
-        return (
-          parseInt(a.inStock / a.dailyQty) - parseInt(b.inStock / b.dailyQty)
-        );
-      }
-    });
+  const drugNameSort = (a, b) => a.brandName.localeCompare(b.brandName);
+  const drugSupplySort = (a, b) =>
+    parseInt(a.inStock / a.dailyQty) - parseInt(b.inStock / b.dailyQty);
+
+  // select sort callback based on sort criteria
+
+  const sortLogic = () => {
+    if (sortCriteria === 'name') {
+      return drugNameSort;
+    } else if (sortCriteria === 'supply') {
+      return drugSupplySort;
+    }
   };
 
-  const filterDrugList = (drugList) => {
-    return drugList.filter(
+  // sort drugs based on criteria
+
+  const allDrugsSorted = allDrugData.sort(sortLogic());
+
+  // filter drugs based on brand or generic name
+
+  const filterDrugList = (drugList) =>
+    drugList.filter(
       (drug) =>
         drug.brandName.toLowerCase().includes(nameFilter.toLowerCase()) ||
         drug.genericName.toLowerCase().includes(nameFilter.toLowerCase())
     );
-  };
 
   // combine sort and filter to generate display list
 
-  const displayDrugList = filterDrugList(sortDrugList(allDrugData));
+  const displayDrugList = filterDrugList(allDrugsSorted);
 
   // add drugs from AddDrug module to allDrugData
 
@@ -63,7 +70,7 @@ function Home() {
 
   // send drug update to server
 
-  const updateDrug = (id, updateObj) => {
+  const updateDrugInfo = (id, updateObj) => {
     fetch(`http://localhost:6001/medications/${id}`, {
       method: 'PATCH',
       headers: {
@@ -101,10 +108,10 @@ function Home() {
           >
             <div className='accordion-body'>
               <SearchFilter
-                sort={sortCriteria}
-                getSort={setSortCriteria}
-                filter={nameFilter}
-                getFilter={setNameFilter}
+                sortCriteria={sortCriteria}
+                setSortCriteria={setSortCriteria}
+                nameFilter={nameFilter}
+                setNameFilter={setNameFilter}
               />
             </div>
           </div>
@@ -139,7 +146,10 @@ function Home() {
         <div className='col-2 bg-warning text-dark'>Refill Soon</div>
         <div className='col-2 bg-danger text-light'>Refill Now!</div>
       </div>
-      <DrugCardMatrix updateDrug={updateDrug} allDrugData={displayDrugList} />
+      <DrugCardMatrix
+        updateDrugInfo={updateDrugInfo}
+        displayDrugList={displayDrugList}
+      />
     </>
   );
 }
