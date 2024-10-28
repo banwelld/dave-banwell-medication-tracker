@@ -9,7 +9,7 @@ function Home() {
   // set state to hold drug, sort, search/filter data
 
   const [allDrugData, setAllDrugData] = useState([]);
-  const [nameFilter, setNameFilter] = useState('');
+  const [filterCriteria, setFilterCriteria] = useState('');
   const [sortCriteria, setSortCriteria] = useState('name');
   const [newDrug, setNewDrug] = useState({});
 
@@ -53,8 +53,8 @@ function Home() {
   const filterDrugList = (drugList) =>
     drugList.filter(
       (drug) =>
-        drug.brandName.toLowerCase().includes(nameFilter.toLowerCase()) ||
-        drug.genericName.toLowerCase().includes(nameFilter.toLowerCase())
+        drug.brandName.toLowerCase().includes(filterCriteria.toLowerCase()) ||
+        drug.genericName.toLowerCase().includes(filterCriteria.toLowerCase())
     );
 
   // combine sort and filter to generate display list
@@ -96,8 +96,8 @@ function Home() {
               <SearchFilter
                 sortCriteria={sortCriteria}
                 setSortCriteria={setSortCriteria}
-                nameFilter={nameFilter}
-                setNameFilter={setNameFilter}
+                filterCriteria={filterCriteria}
+                setfilterCriteria={setFilterCriteria}
               />
             </div>
           </div>

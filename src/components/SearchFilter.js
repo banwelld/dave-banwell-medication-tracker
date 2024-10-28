@@ -3,8 +3,8 @@ import React from 'react';
 function SearchFilter({
   sortCriteria,
   setSortCriteria,
-  nameFilter,
-  setNameFilter,
+  filterCriteria,
+  setFilterCriteria,
 }) {
   // search/filter jsx code
 
@@ -17,9 +17,9 @@ function SearchFilter({
               id='nameFilter'
               type='text'
               className='form-control'
-              value={nameFilter}
+              value={filterCriteria}
               placeholder='Filter by brand or generic name...'
-              onChange={(e) => setNameFilter(e.target.value)}
+              onChange={(e) => setFilterCriteria(e.target.value)}
             />
           </div>
           <div className='col-4'>
