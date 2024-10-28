@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
+import SelectOption from './SelectOption';
+import WarningCheckbox from './WarningCheckbox';
 
-function AddDrug({ renderNewDrug, drugWarnings }) {
-  // begin with empty drug object
+function AddDrug({ renderNewDrug, drugWarningList, serverAddress }) {
+  // initialize empty drug object
 
   const emptyDrugObj = {
     brandName: '',
     genericName: '',
-    doseVal: '',
+    drugFormat: '',
     doseUnits: '',
+    doseVal: '',
+    qtyInStock: '',
     dailyQty: '',
     isOptional: false,
     withFood: false,
@@ -21,27 +25,32 @@ function AddDrug({ renderNewDrug, drugWarnings }) {
     evenDosing: false,
     takeAll: false,
     dontStop: false,
-    NoDriving: false,
-    qtyInStock: '',
+    noDriving: false,
     imgUrl: '',
   };
 
-  // state variables
+  // declare state variables
 
   const [newDrug, setNewDrug] = useState(emptyDrugObj);
+
+  // function to check if a value is numeric
+
+  const isNumeric = (string) => !isNaN(parseFloat(string)) && !isNaN(string);
 
   // event listener to set new drug data into state
 
   const handleInfoChange = (e) => {
+    //destructure e.target for readability
     const { id, type, value, checked } = e.target;
-    const inputValue = type === 'checkbox' ? checked : value;
-    setNewDrug({ ...newDrug, [id]: inputValue });
+    const numAdjustedValue = isNumeric(value) ? parseFloat(value) : value;
+    const attributeVal = type === 'checkbox' ? checked : numAdjustedValue;
+    setNewDrug({ ...newDrug, [id]: attributeVal });
   };
 
   // send new drug to server
 
   const addNewDrug = () => {
-    fetch('http://localhost:6001/medications', {
+    fetch(serverAddress, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -61,32 +70,30 @@ function AddDrug({ renderNewDrug, drugWarnings }) {
     setNewDrug(emptyDrugObj);
   };
 
-  // checkbox component to propagate warning list
+  // select list arrays to populate options (if lists grow, consider housing on server)
 
-  const CheckboxElement = ({ id, labelText }) => {
-    return (
-      <div className='form-check mt-0 mb-0'>
-        <input
-          type='checkbox'
-          className='form-check-input'
-          id={id}
-          checked={newDrug[id]}
-          onChange={handleInfoChange}
-        />
-        <label className='form-check-label small' htmlFor={id}>
-          {labelText}
-        </label>
-      </div>
-    );
-  };
+  const doseUnitArr = [0, 'mg', 'ug', 'mcg', 'IU', 'mg/ml', 'ug/ml'];
+  const drugFormatArr = [0, 'tablet', 'capsule', 'ml'];
 
-  // list the warning checkboxes for the dropdown
+  // mapped select lists
 
-  const warningList = drugWarnings.map((warning) => (
-    <CheckboxElement
+  const doseUnitList = doseUnitArr.map((listItem) => (
+    <SelectOption key={listItem} listItem={listItem} />
+  ));
+
+  const drugFormatList = drugFormatArr.map((listItem) => (
+    <SelectOption key={listItem} listItem={listItem} />
+  ));
+
+  // mapped list of warning checkboxes for the dropdown
+
+  const drugWarningChecklist = drugWarningList.map((warning) => (
+    <WarningCheckbox
       key={warning.id}
       id={warning.id}
       labelText={warning.labelText}
+      checked={newDrug[warning.id]}
+      handleInfoChange={handleInfoChange}
     />
   ));
 
@@ -148,11 +155,7 @@ function AddDrug({ renderNewDrug, drugWarnings }) {
             value={newDrug.doseUnits}
             onChange={handleInfoChange}
           >
-            <option value='0'></option>
-            <option value='mg'>mg</option>
-            <option value='ug'>ug</option>
-            <option value='ml'>ml</option>
-            <option value='IU'>IU</option>
+            {doseUnitList}
           </select>
         </div>
         <div className='col'>
@@ -181,26 +184,39 @@ function AddDrug({ renderNewDrug, drugWarnings }) {
               &nbsp;&nbsp;&nbsp;Select All Applicable&nbsp;&nbsp;&nbsp;
             </button>
             <div className='dropdown-menu p-2' style={{ width: '20rem' }}>
-              {warningList}
+              {drugWarningChecklist}
             </div>
           </div>
         </div>
       </div>
       <div className='row g-3 mt-3'>
-        <div className='col'>
-          <label htmlFor='dailyQty' className='form-label'>
+        <div className='col-2'>
+          <label htmlFor='qtyInStock' className='form-label'>
             Qty in Stock
           </label>
           <input
             type='number'
             step='1'
             className='form-control'
-            id='inStock'
+            id='qtyInStock'
             value={newDrug.qtyInStock}
             onChange={handleInfoChange}
           />
         </div>
-        <div className='col-10'>
+        <div className='col-2'>
+          <label htmlFor='drugFormat' className='form-label'>
+            Format
+          </label>
+          <select
+            id='drugFormat'
+            className='form-select'
+            value={newDrug.drugFormat}
+            onChange={handleInfoChange}
+          >
+            {drugFormatList}
+          </select>
+        </div>
+        <div className='col-8'>
           <label className='form-label' htmlFor='imgUrl'>
             Link to Medication Image
           </label>

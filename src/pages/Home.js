@@ -11,14 +11,18 @@ function Home() {
   const [nameFilter, setNameFilter] = useState('');
   const [sortCriteria, setSortCriteria] = useState('name');
 
-  // get drug warnings from context
+  // get drug warning list from context
 
-  const drugWarnings = useOutletContext();
+  const drugWarningList = useOutletContext();
+
+  // assign server url to variable
+
+  const serverAddress = 'http://localhost:6001/medications/';
 
   // retrieve data from api and set into state
 
   const getAllDrugData = () => {
-    fetch('http://localhost:6001/medications')
+    fetch(serverAddress)
       .then((response) => response.json())
       .then((data) => setAllDrugData(data))
       .catch((error) => console.log(error));
@@ -71,7 +75,7 @@ function Home() {
   // send drug update to server
 
   const updateDrugInfo = (id, updateObj) => {
-    fetch(`http://localhost:6001/medications/${id}`, {
+    fetch(`${serverAddress}}/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -79,9 +83,9 @@ function Home() {
       body: JSON.stringify(updateObj),
     })
       .then((response) => response.json())
-      .then((updatedDrug) => {
-        setAllDrugData((prevData) =>
-          prevData.map((d) => (d.id === updatedDrug.id ? updatedDrug : d))
+      .then((drug) => {
+        setAllDrugData((prevDrugData) =>
+          prevDrugData.map((d) => (d.id === drug.id ? drug : d))
         );
       })
       .catch((error) => console.log(error));
@@ -135,7 +139,8 @@ function Home() {
             <div className='accordion-body'>
               <AddDrug
                 renderNewDrug={renderNewDrug}
-                drugWarnings={drugWarnings}
+                drugWarningList={drugWarningList}
+                serverAddress={serverAddress}
               />
             </div>
           </div>

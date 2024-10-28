@@ -24,6 +24,12 @@ function App() {
     getDrugWarnings();
   }, []);
 
+  // check if any drug warnings are available
+
+  if (warnings.length === 0) return <h1>Loading...</h1>;
+
+  // return the App component with the drug warnings context
+
   return (
     <>
       <header>

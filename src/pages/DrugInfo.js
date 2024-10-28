@@ -30,7 +30,25 @@ function DrugInfo() {
     getDrug(drugId);
   }, [drugId]);
 
-  // get the drug's warnings and instructions
+  // destructure drugInfo for jsx readability
+
+  const {
+    imgUrl,
+    brandName,
+    genericName,
+    drugFormat,
+    doseVal,
+    doseUnits,
+    dailyQty,
+    isOptional,
+    qtyInStock,
+  } = drugInfo;
+
+  // get day's supply from qtyInStock and dailyQty
+
+  const daysSupply = parseInt(qtyInStock / dailyQty);
+
+  // create a list of the drug's warnings and instructions
 
   const warningIdList = Object.keys(drugInfo).filter(
     (key) => drugInfo[key] === true && key !== 'isOptional'
@@ -43,34 +61,32 @@ function DrugInfo() {
     return <li key={displayWarning.id}>{displayWarning.labelText}</li>;
   });
 
-  // render the drug info
+  // render the component
 
   return (
     <div>
       <img
-        src={drugInfo.imgUrl}
-        alt={drugInfo.brandName + 'image'}
+        src={imgUrl}
+        alt={brandName + 'image'}
         width='200px'
         className='mt-3 mb-3'
       />
       <h2 className='text-blue'>
-        {drugInfo.brandName}
+        {brandName}
         <small>
           {' '}
-          ({drugInfo.doseVal} {drugInfo.doseUnits})
+          ({doseVal} {doseUnits})
         </small>
       </h2>
-      <h3 className='text-secondary'>{drugInfo.genericName}</h3>
+      <h3 className='text-secondary'>{genericName}</h3>
       <h5>
-        Take {drugInfo.dailyQty} time{parseInt(drugInfo.dailyQty) > 1 && 's'},
-        daily
-        {drugInfo.isOptional && ', as needed'}
+        Take {dailyQty} {drugFormat}
+        {dailyQty > 1 && 's'}, daily
+        {isOptional && ', as needed'}
       </h5>
       <p>
-        Personal Supply: {drugInfo.qtyInStock} dose
-        {drugInfo.qtyInStock !== 1 && 's'} (
-        {parseInt(drugInfo.qtyInStock / drugInfo.dailyQty)} day
-        {parseInt(drugInfo.qtyInStock / drugInfo.dailyQty) !== 1 && 's'})
+        Personal Supply: {qtyInStock} dose{qtyInStock !== 1 && 's'} (
+        {daysSupply} day{daysSupply !== 1 && 's'})
       </p>
       <h4 className='text-danger'>
         {warningList.length > 0 && 'Warnings and Additional Instructions'}
