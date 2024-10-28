@@ -68,7 +68,7 @@
       "takeAll": false,
       "dontStop": false,
       "NoDriving": false,
-      "qtyInStock": 500,
+      "qtyInStock": 498,
       "imgUrl": "https://www.progressivenutritional.com/cdn/shop/files/4bf5948375834948a6958b45bd518a863e908c792a62e0da3d6ac7a84966ef93.png",
       "id": 3
     },
@@ -167,6 +167,30 @@
       "noDriving": false,
       "imgUrl": "https://m.media-amazon.com/images/I/11jmsioZtTL.jpg",
       "id": 7
+    },
+    {
+      "brandName": "Zithromax",
+      "genericName": "Azithromycin",
+      "drugFormat": "tablet",
+      "doseUnits": "mg",
+      "doseVal": 500,
+      "qtyInStock": 7,
+      "dailyQty": 1,
+      "isOptional": false,
+      "withFood": true,
+      "withWater": false,
+      "fullStomach": false,
+      "emptyStomach": false,
+      "onSleep": false,
+      "onWake": true,
+      "avoidAlcohol": false,
+      "causesSleep": false,
+      "evenDosing": false,
+      "takeAll": true,
+      "dontStop": false,
+      "noDriving": false,
+      "imgUrl": "https://m.media-amazon.com/images/I/31qyo8svl1S.jpg",
+      "id": 8
     }
   ],
   "warnings": [

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function DrugCardActions({ drugId, qtyInStock, updateDrug }) {
+function DrugCardActions({ drugId, qtyInStock, updateDrugInfo }) {
   // deduct 1 from the drug's qtyInStock on click
 
   const takeNowClick = () => {
@@ -10,7 +10,7 @@ function DrugCardActions({ drugId, qtyInStock, updateDrug }) {
         "You do not have any of this medication in stock. Please visit the drug's info page to update your stock if you've refilled it."
       );
     } else {
-      updateDrug(drugId, { inStock: qtyInStock - 1 });
+      updateDrugInfo(drugId, { qtyInStock: qtyInStock - 1 });
     }
   };
 

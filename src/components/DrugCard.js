@@ -2,7 +2,7 @@ import React from 'react';
 import DrugCardInfo from './DrugCardInfo';
 import DrugCardActions from './DrugCardActions';
 
-function DrugCard({ updateDrug, drugObj }) {
+function DrugCard({ updateDrugInfo, drugObj }) {
   // destructure the drug object
 
   const {
@@ -46,7 +46,7 @@ function DrugCard({ updateDrug, drugObj }) {
         <DrugCardActions
           drugId={id}
           qtyInStock={qtyInStock}
-          updateDrug={updateDrug}
+          updateDrugInfo={updateDrugInfo}
         />
       </div>
     </article>

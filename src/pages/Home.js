@@ -75,7 +75,7 @@ function Home() {
   // send drug update to server
 
   const updateDrugInfo = (id, updateObj) => {
-    fetch(`${serverAddress}}/${id}`, {
+    fetch(`${serverAddress}${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

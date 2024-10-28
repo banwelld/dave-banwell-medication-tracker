@@ -78,10 +78,10 @@ function DrugInfo() {
           ({doseVal} {doseUnits})
         </small>
       </h2>
-      <h3 className='text-secondary'>{genericName}</h3>
+      <h5 className='text-secondary'>{genericName}</h5>
       <h5>
         Take {dailyQty} {drugFormat}
-        {dailyQty > 1 && 's'}, daily
+        {dailyQty > 1 && 's'} daily
         {isOptional && ', as needed'}
       </h5>
       <p>
