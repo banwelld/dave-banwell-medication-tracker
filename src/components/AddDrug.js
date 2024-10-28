@@ -1,37 +1,12 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import SelectOption from './SelectOption';
 import WarningCheckbox from './WarningCheckbox';
+import { fetchOperation } from '../utils/utility-functions';
 
-function AddDrug({ renderNewDrug, drugWarningList, serverAddress }) {
-  // initialize empty drug object
+function AddDrug({ displayNewDrug, drugWarningList, newDrug, setNewDrug }) {
+  // ref to hold empty drug object for resetting form
 
-  const emptyDrugObj = {
-    brandName: '',
-    genericName: '',
-    drugFormat: '',
-    doseUnits: '',
-    doseVal: '',
-    qtyInStock: '',
-    dailyQty: '',
-    isOptional: false,
-    withFood: false,
-    withWater: false,
-    fullStomach: false,
-    emptyStomach: false,
-    onSleep: false,
-    onWake: false,
-    avoidAlcohol: false,
-    causesSleep: false,
-    evenDosing: false,
-    takeAll: false,
-    dontStop: false,
-    noDriving: false,
-    imgUrl: '',
-  };
-
-  // declare state variables
-
-  const [newDrug, setNewDrug] = useState(emptyDrugObj);
+  const emptyDrugObj = useRef(newDrug);
 
   // function to check if a value is numeric
 
@@ -40,34 +15,16 @@ function AddDrug({ renderNewDrug, drugWarningList, serverAddress }) {
   // event listener to set new drug data into state
 
   const handleInfoChange = (e) => {
-    //destructure e.target for readability
     const { id, type, value, checked } = e.target;
     const numAdjustedValue = isNumeric(value) ? parseFloat(value) : value;
     const attributeVal = type === 'checkbox' ? checked : numAdjustedValue;
     setNewDrug({ ...newDrug, [id]: attributeVal });
   };
 
-  // send new drug to server
-
-  const addNewDrug = () => {
-    fetch(serverAddress, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newDrug),
-    })
-      .then((response) => response.json())
-      .then((data) => renderNewDrug(data))
-      .catch((error) => console.log(error));
-  };
-
-  // submit new drug data
-
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    addNewDrug();
-    setNewDrug(emptyDrugObj);
+    fetchOperation(displayNewDrug, 'POST', newDrug);
+    setNewDrug(emptyDrugObj.current);
   };
 
   // select list arrays to populate options (if lists grow, consider housing on server)

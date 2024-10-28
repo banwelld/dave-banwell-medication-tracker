@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { fetchOperation } from '../utils/utility-functions';
 
-function DrugCardActions({ drugId, qtyInStock, updateDrugInfo }) {
+function DrugCardActions({ drugId, qtyInStock, displayUpdatedDrug }) {
   // deduct 1 from the drug's qtyInStock on click
 
   const takeNowClick = () => {
@@ -10,7 +11,12 @@ function DrugCardActions({ drugId, qtyInStock, updateDrugInfo }) {
         "You do not have any of this medication in stock. Please visit the drug's info page to update your stock if you've refilled it."
       );
     } else {
-      updateDrugInfo(drugId, { qtyInStock: qtyInStock - 1 });
+      fetchOperation(
+        displayUpdatedDrug,
+        'PATCH',
+        { qtyInStock: qtyInStock - 1 },
+        drugId
+      );
     }
   };
 
@@ -23,7 +29,7 @@ function DrugCardActions({ drugId, qtyInStock, updateDrugInfo }) {
         to={`/DrugInfo/${drugId}`}
         className='btn btn-secondary mt-3 shadow container'
       >
-        View Drug Info
+        View All Drug Info
       </Link>
     </div>
   );

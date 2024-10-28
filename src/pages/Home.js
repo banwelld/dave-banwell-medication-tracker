@@ -3,6 +3,7 @@ import { useOutletContext } from 'react-router-dom';
 import DrugCardMatrix from '../components/DrugCardMatrix';
 import SearchFilter from '../components/SearchFilter';
 import AddDrug from '../components/AddDrug';
+import { fetchOperation } from '../utils/utility-functions';
 
 function Home() {
   // set state to hold drug, sort, search/filter data
@@ -10,28 +11,21 @@ function Home() {
   const [allDrugData, setAllDrugData] = useState([]);
   const [nameFilter, setNameFilter] = useState('');
   const [sortCriteria, setSortCriteria] = useState('name');
+  const [newDrug, setNewDrug] = useState({});
 
   // get drug warning list from context
 
   const drugWarningList = useOutletContext();
 
-  // assign server url to variable
-
-  const serverAddress = 'http://localhost:6001/medications/';
-
-  // retrieve data from api and set into state
-
-  const getAllDrugData = () => {
-    fetch(serverAddress)
-      .then((response) => response.json())
-      .then((data) => setAllDrugData(data))
-      .catch((error) => console.log(error));
-  };
-
-  // trigger fetch of drug data on component mount
-
   useEffect(() => {
-    getAllDrugData();
+    fetchOperation((data) => setAllDrugData(data));
+    fetchOperation(
+      (data) => setNewDrug(data),
+      'GET',
+      null,
+      null,
+      'emptyDrugObject'
+    );
   }, []);
 
   // declare sort callback functions
@@ -67,29 +61,17 @@ function Home() {
 
   const displayDrugList = filterDrugList(allDrugsSorted);
 
-  // add drugs from AddDrug module to allDrugData
+  // update drug card list wwith new drug
 
-  const renderNewDrug = (drugObj) =>
-    setAllDrugData((prevData) => [...prevData, drugObj]);
+  const displayNewDrug = (newDrug) =>
+    setAllDrugData((prevData) => [...prevData, newDrug]);
 
-  // send drug update to server
+  // update drug card(s) with revised data
 
-  const updateDrugInfo = (id, updateObj) => {
-    fetch(`${serverAddress}${id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(updateObj),
-    })
-      .then((response) => response.json())
-      .then((drug) => {
-        setAllDrugData((prevDrugData) =>
-          prevDrugData.map((d) => (d.id === drug.id ? drug : d))
-        );
-      })
-      .catch((error) => console.log(error));
-  };
+  const displayUpdatedDrug = (updatedDrug) =>
+    setAllDrugData((prevData) =>
+      prevData.map((drug) => (drug.id === updatedDrug.id ? updatedDrug : drug))
+    );
 
   return (
     <>
@@ -138,9 +120,10 @@ function Home() {
           >
             <div className='accordion-body'>
               <AddDrug
-                renderNewDrug={renderNewDrug}
+                displayNewDrug={displayNewDrug}
                 drugWarningList={drugWarningList}
-                serverAddress={serverAddress}
+                newDrug={newDrug}
+                setNewDrug={setNewDrug}
               />
             </div>
           </div>
@@ -152,7 +135,7 @@ function Home() {
         <div className='col-2 bg-danger text-light'>Refill Now!</div>
       </div>
       <DrugCardMatrix
-        updateDrugInfo={updateDrugInfo}
+        displayUpdatedDrug={displayUpdatedDrug}
         displayDrugList={displayDrugList}
       />
     </>
