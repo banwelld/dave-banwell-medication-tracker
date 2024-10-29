@@ -1,3 +1,5 @@
+// abstracted fetch function for all server interactions
+
 export const fetchOperation = (
   onSuccess,
   method = 'GET',

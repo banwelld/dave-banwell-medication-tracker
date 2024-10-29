@@ -1,3 +1,5 @@
+// list of drug warnings and instructions
+
 export const drugWarnings = [
   {
     id: 'isOptional',
@@ -52,6 +54,8 @@ export const drugWarnings = [
     labelText: 'Do not drive after use',
   },
 ];
+
+// blueprint with list of all possible drug attributes
 
 export const drugBlueprint = {
   brandName: '',

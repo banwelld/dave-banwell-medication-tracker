@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import WarningCheckbox from './WarningCheckbox';
-import { fetchOperation } from '../utils/utility-functions';
+import { fetchOperation } from '../utils/fetchFunction';
 import { drugBlueprint, drugWarnings } from '../utils/lists';
 
 function AddDrug({ displayNewDrugObj }) {

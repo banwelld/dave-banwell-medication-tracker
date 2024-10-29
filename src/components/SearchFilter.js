@@ -6,7 +6,7 @@ function SearchFilter({
   filterCriteria,
   setFilterCriteria,
 }) {
-  // search/filter jsx code
+  // render component jsx
 
   return (
     <div className='row g-3'>

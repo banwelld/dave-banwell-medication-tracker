@@ -31,8 +31,8 @@ function NavBar() {
               </NavLink>
             </li>
             <li className='nav-item'>
-              <NavLink className='nav-link' to='/PharmacyReceipts'>
-                Refill medication
+              <NavLink className='nav-link' to='/AdjustSupply'>
+                Adjust supply
               </NavLink>
             </li>
             <li className='nav-item'>

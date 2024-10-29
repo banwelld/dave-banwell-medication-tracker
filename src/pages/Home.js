@@ -3,24 +3,25 @@ import { useOutletContext } from 'react-router-dom';
 import DrugCardMatrix from '../components/DrugCardMatrix';
 import SearchFilter from '../components/SearchFilter';
 import AddDrug from '../components/AddDrug';
+import {
+  drugNameSort,
+  drugSupplySort,
+  drugNameFilter,
+} from '../utils/sortFilterFunctions';
 
 function Home() {
   // get the drug data and setter callback from the app component's outlet
 
   const [allDrugData, setAllDrugData] = useOutletContext();
 
+  // set state for sort and filter criteria
+
   const [filterCriteria, setFilterCriteria] = useState('');
-  const [sortCriteria, setSortCriteria] = useState('name');
+  const [sortCriteria, setSortCriteria] = useState('name'); // defaulted to 'name'
 
-  // declare sort callback functions
+  // choose imported sort callback based on sort criteria
 
-  const drugNameSort = (a, b) => a.brandName.localeCompare(b.brandName);
-  const drugSupplySort = (a, b) =>
-    parseInt(a.inStock / a.dailyQty) - parseInt(b.inStock / b.dailyQty);
-
-  // select sort callback based on sort criteria
-
-  const sortLogic = () => {
+  const chooseSortCallback = () => {
     if (sortCriteria === 'name') {
       return drugNameSort;
     } else if (sortCriteria === 'supply') {
@@ -30,20 +31,13 @@ function Home() {
 
   // sort drugs based on criteria
 
-  const allDrugsSorted = allDrugData.sort(sortLogic());
+  const allDrugsSorted = allDrugData.sort(chooseSortCallback());
 
-  // filter drugs based on brand or generic name
+  // filter drugs by name for the final, working list
 
-  const filterDrugList = (drugList) =>
-    drugList.filter(
-      (drug) =>
-        drug.brandName.toLowerCase().includes(filterCriteria.toLowerCase()) ||
-        drug.genericName.toLowerCase().includes(filterCriteria.toLowerCase())
-    );
-
-  // combine sort and filter to generate display list
-
-  const displayDrugList = filterDrugList(allDrugsSorted);
+  const workingDrugList = allDrugsSorted.filter((drug) =>
+    drugNameFilter(drug, filterCriteria)
+  );
 
   // update drug card list wwith new drug
 
@@ -81,7 +75,7 @@ function Home() {
                 sortCriteria={sortCriteria}
                 setSortCriteria={setSortCriteria}
                 filterCriteria={filterCriteria}
-                setfilterCriteria={setFilterCriteria}
+                setFilterCriteria={setFilterCriteria}
               />
             </div>
           </div>
@@ -115,7 +109,7 @@ function Home() {
       </div>
       <DrugCardMatrix
         displayUpdatedDrug={displayUpdatedDrug}
-        displayDrugList={displayDrugList}
+        workingDrugList={workingDrugList}
       />
     </>
   );

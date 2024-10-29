@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { fetchOperation } from '../utils/utility-functions';
+import { fetchOperation } from '../utils/fetchFunction';
 
 function DrugCardActions({ drugId, qtyInStock, displayUpdatedDrug }) {
   // deduct 1 from the drug's qtyInStock
