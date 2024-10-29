@@ -1,36 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useOutletContext } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { fetchOperation } from '../utils/utility-functions';
+import { drugWarnings } from '../utils/lists';
 
 function DrugInfo() {
   // set state variables to hold drug info
 
   const [drugInfo, setDrugInfo] = useState({});
 
-  // get drug warnings from context
-
-  const drugWarnings = useOutletContext();
-
   // get the parameter id
 
   const params = useParams();
   const drugId = params.id;
 
-  // get the drug data from the API using the id
-
-  const getDrug = (id) => {
-    fetch(`http://localhost:6001/medications/${id}`)
-      .then((response) => response.json())
-      .then((data) => setDrugInfo(data))
-      .catch((error) => console.log(error));
-  };
-
-  // fetch the drug and warning data when the component mounts
+  // fetch the drug info when the component mounts
 
   useEffect(() => {
-    getDrug(drugId);
+    fetchOperation((data) => setDrugInfo(data), 'GET', null, drugId);
   }, [drugId]);
 
-  // destructure drugInfo for jsx readability
+  // destructure drugInfo
 
   const {
     imgUrl,
@@ -44,7 +33,7 @@ function DrugInfo() {
     qtyInStock,
   } = drugInfo;
 
-  // get day's supply from qtyInStock and dailyQty
+  // get day's supply (rounded down) from qtyInStock and dailyQty
 
   const daysSupply = parseInt(qtyInStock / dailyQty);
 

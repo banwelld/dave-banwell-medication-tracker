@@ -9,8 +9,7 @@ function Header() {
           <img
             src='/images/MedTrackerIcon.png'
             alt='Medication Tracker Icon'
-            style={{ width: '1.5rem' }}
-            className=''
+            className='mt-icon-md'
           />
           <h1 className='text-secondary'>MedTracker</h1>
         </div>

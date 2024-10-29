@@ -39,6 +39,10 @@ will take too much time for this project */
     height: 10rem;
 }
 
+.mt-icon-md {
+    width: 1.5rem;
+}
+
 .mt-icon-sm {
     width: 1rem;
 }

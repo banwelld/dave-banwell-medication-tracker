@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { fetchOperation } from '../utils/utility-functions';
 
 function DrugCardActions({ drugId, qtyInStock, displayUpdatedDrug }) {
-  // deduct 1 from the drug's qtyInStock on click
+  // deduct 1 from the drug's qtyInStock
 
   const takeNowClick = () => {
     if (!qtyInStock) {

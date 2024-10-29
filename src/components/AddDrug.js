@@ -1,12 +1,12 @@
-import React, { useRef } from 'react';
-import SelectOption from './SelectOption';
+import { useState } from 'react';
 import WarningCheckbox from './WarningCheckbox';
 import { fetchOperation } from '../utils/utility-functions';
+import { drugBlueprint, drugWarnings } from '../utils/lists';
 
-function AddDrug({ displayNewDrug, drugWarningList, newDrug, setNewDrug }) {
-  // ref to hold empty drug object for resetting form
+function AddDrug({ displayNewDrugObj }) {
+  // set state variables
 
-  const emptyDrugObj = useRef(newDrug);
+  const [newDrugObj, setNewDrugObj] = useState(drugBlueprint);
 
   // function to check if a value is numeric
 
@@ -18,38 +18,42 @@ function AddDrug({ displayNewDrug, drugWarningList, newDrug, setNewDrug }) {
     const { id, type, value, checked } = e.target;
     const numAdjustedValue = isNumeric(value) ? parseFloat(value) : value;
     const attributeVal = type === 'checkbox' ? checked : numAdjustedValue;
-    setNewDrug({ ...newDrug, [id]: attributeVal });
+    setNewDrugObj({ ...newDrugObj, [id]: attributeVal });
   };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    fetchOperation(displayNewDrug, 'POST', newDrug);
-    setNewDrug(emptyDrugObj.current);
+    fetchOperation(displayNewDrugObj, 'POST', newDrugObj);
+    setNewDrugObj(drugBlueprint);
   };
 
   // select list arrays to populate options (if lists grow, consider housing on server)
 
-  const doseUnitArr = [0, 'mg', 'ug', 'mcg', 'IU', 'mg/ml', 'ug/ml'];
-  const drugFormatArr = [0, 'tablet', 'capsule', 'ml'];
+  const doseUnitArr = ['', 'mg', 'ug', 'mcg', 'IU'];
+  const drugFormatArr = ['', 'tablet', 'capsule', 'ml'];
 
-  // mapped select lists
+  // mapped select option lists
 
   const doseUnitList = doseUnitArr.map((listItem) => (
-    <SelectOption key={listItem} listItem={listItem} />
+    <option key={listItem} value={listItem}>
+      {listItem}
+    </option>
   ));
 
   const drugFormatList = drugFormatArr.map((listItem) => (
-    <SelectOption key={listItem} listItem={listItem} />
+    <option key={listItem} value={listItem}>
+      {listItem}
+    </option>
   ));
 
   // mapped list of warning checkboxes for the dropdown
 
-  const drugWarningChecklist = drugWarningList.map((warning) => (
+  const drugWarningChecklist = drugWarnings.map((warning) => (
     <WarningCheckbox
       key={warning.id}
       id={warning.id}
       labelText={warning.labelText}
-      checked={newDrug[warning.id]}
+      checked={newDrugObj[warning.id]}
       handleInfoChange={handleInfoChange}
     />
   ));
@@ -67,7 +71,7 @@ function AddDrug({ displayNewDrug, drugWarningList, newDrug, setNewDrug }) {
             type='text'
             className='form-control'
             id='brandName'
-            value={newDrug.brandName}
+            value={newDrugObj.brandName}
             onChange={handleInfoChange}
           />
           <div id='brandNameHelp' className='form-text'>
@@ -82,7 +86,7 @@ function AddDrug({ displayNewDrug, drugWarningList, newDrug, setNewDrug }) {
             type='text'
             className='form-control'
             id='genericName'
-            value={newDrug.genericName}
+            value={newDrugObj.genericName}
             onChange={handleInfoChange}
           />
           <div id='genericNameHelp' className='form-text'>
@@ -98,7 +102,7 @@ function AddDrug({ displayNewDrug, drugWarningList, newDrug, setNewDrug }) {
             step='1'
             className='form-control'
             id='doseVal'
-            value={newDrug.doseVal}
+            value={newDrugObj.doseVal}
             onChange={handleInfoChange}
           />
         </div>
@@ -109,7 +113,7 @@ function AddDrug({ displayNewDrug, drugWarningList, newDrug, setNewDrug }) {
           <select
             id='doseUnits'
             className='form-select'
-            value={newDrug.doseUnits}
+            value={newDrugObj.doseUnits}
             onChange={handleInfoChange}
           >
             {doseUnitList}
@@ -124,7 +128,7 @@ function AddDrug({ displayNewDrug, drugWarningList, newDrug, setNewDrug }) {
             step='1'
             className='form-control'
             id='dailyQty'
-            value={newDrug.dailyQty}
+            value={newDrugObj.dailyQty}
             onChange={handleInfoChange}
           />
         </div>
@@ -156,7 +160,7 @@ function AddDrug({ displayNewDrug, drugWarningList, newDrug, setNewDrug }) {
             step='1'
             className='form-control'
             id='qtyInStock'
-            value={newDrug.qtyInStock}
+            value={newDrugObj.qtyInStock}
             onChange={handleInfoChange}
           />
         </div>
@@ -167,7 +171,7 @@ function AddDrug({ displayNewDrug, drugWarningList, newDrug, setNewDrug }) {
           <select
             id='drugFormat'
             className='form-select'
-            value={newDrug.drugFormat}
+            value={newDrugObj.drugFormat}
             onChange={handleInfoChange}
           >
             {drugFormatList}
@@ -181,7 +185,7 @@ function AddDrug({ displayNewDrug, drugWarningList, newDrug, setNewDrug }) {
             type='text'
             className='form-control'
             id='imgUrl'
-            value={newDrug.imgUrl}
+            value={newDrugObj.imgUrl}
             placeholder='E.g., http://www.image.com/image.jpg'
             onChange={handleInfoChange}
           />

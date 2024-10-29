@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useOutletContext } from 'react-router-dom';
 import DrugCardMatrix from '../components/DrugCardMatrix';
 import SearchFilter from '../components/SearchFilter';
 import AddDrug from '../components/AddDrug';
@@ -11,21 +10,11 @@ function Home() {
   const [allDrugData, setAllDrugData] = useState([]);
   const [filterCriteria, setFilterCriteria] = useState('');
   const [sortCriteria, setSortCriteria] = useState('name');
-  const [newDrug, setNewDrug] = useState({});
 
-  // get drug warning list from context
-
-  const drugWarningList = useOutletContext();
+  // get all drug data from server
 
   useEffect(() => {
     fetchOperation((data) => setAllDrugData(data));
-    fetchOperation(
-      (data) => setNewDrug(data),
-      'GET',
-      null,
-      null,
-      'emptyDrugObject'
-    );
   }, []);
 
   // declare sort callback functions
@@ -63,8 +52,8 @@ function Home() {
 
   // update drug card list wwith new drug
 
-  const displayNewDrug = (newDrug) =>
-    setAllDrugData((prevData) => [...prevData, newDrug]);
+  const displayNewDrugObj = (newDrugObj) =>
+    setAllDrugData((prevData) => [...prevData, newDrugObj]);
 
   // update drug card(s) with revised data
 
@@ -119,12 +108,7 @@ function Home() {
             data-bs-parent='#homepageAccordion'
           >
             <div className='accordion-body'>
-              <AddDrug
-                displayNewDrug={displayNewDrug}
-                drugWarningList={drugWarningList}
-                newDrug={newDrug}
-                setNewDrug={setNewDrug}
-              />
+              <AddDrug displayNewDrugObj={displayNewDrugObj} />
             </div>
           </div>
         </div>
