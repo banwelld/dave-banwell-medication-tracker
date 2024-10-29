@@ -1,21 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { useOutletContext } from 'react-router-dom';
 import DrugCardMatrix from '../components/DrugCardMatrix';
 import SearchFilter from '../components/SearchFilter';
 import AddDrug from '../components/AddDrug';
-import { fetchOperation } from '../utils/utility-functions';
 
 function Home() {
-  // set state to hold drug, sort, search/filter data
+  // get the drug data and setter callback from the app component's outlet
 
-  const [allDrugData, setAllDrugData] = useState([]);
+  const [allDrugData, setAllDrugData] = useOutletContext();
+
   const [filterCriteria, setFilterCriteria] = useState('');
   const [sortCriteria, setSortCriteria] = useState('name');
-
-  // get all drug data from server
-
-  useEffect(() => {
-    fetchOperation((data) => setAllDrugData(data));
-  }, []);
 
   // declare sort callback functions
 

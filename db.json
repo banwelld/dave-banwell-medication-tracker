@@ -167,6 +167,30 @@
       "noDriving": false,
       "imgUrl": "https://m.media-amazon.com/images/I/11jmsioZtTL.jpg",
       "id": 7
+    },
+    {
+      "brandName": "Zithromax",
+      "genericName": "Azithromycin",
+      "drugFormat": "tablet",
+      "doseUnits": "mg",
+      "doseVal": 500,
+      "qtyInStock": 6,
+      "dailyQty": 1,
+      "isOptional": false,
+      "withFood": true,
+      "withWater": false,
+      "fullStomach": false,
+      "emptyStomach": false,
+      "onSleep": false,
+      "onWake": false,
+      "avoidAlcohol": false,
+      "causesSleep": false,
+      "evenDosing": false,
+      "takeAll": true,
+      "dontStop": false,
+      "noDriving": false,
+      "imgUrl": "https://www.lifestreamrx.com/cdn-cgi/image/quality%3D85/assets/images/73894.jpg",
+      "id": 8
     }
   ]
 }
