@@ -1,23 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchOperation } from '../utils/utility-functions';
 import { drugWarnings } from '../utils/lists';
+import { useOutletContext } from 'react-router-dom';
 
 function DrugInfo() {
-  // set state variables to hold drug info
+  // get drug data from app component outlet
 
-  const [drugInfo, setDrugInfo] = useState({});
+  const [allDrugData] = useOutletContext();
 
   // get the parameter id
 
   const params = useParams();
   const drugId = params.id;
 
-  // fetch the drug info when the component mounts
+  // assign the drug object with the matching id to a variable
 
-  useEffect(() => {
-    fetchOperation((data) => setDrugInfo(data), 'GET', null, drugId);
-  }, [drugId]);
+  const drugInfo = allDrugData.find((drug) => drug.id === parseInt(drugId));
 
   // destructure drugInfo
 
