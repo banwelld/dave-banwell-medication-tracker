@@ -14,20 +14,15 @@ function Home() {
 
   const [allDrugData, setAllDrugData] = useOutletContext();
 
-  // set state for sort and filter criteria
+  // set state for sort (defaulted to name) and filter criteria
 
   const [filterCriteria, setFilterCriteria] = useState('');
-  const [sortCriteria, setSortCriteria] = useState('name'); // defaulted to 'name'
+  const [sortCriteria, setSortCriteria] = useState('name');
 
-  // choose imported sort callback based on sort criteria
+  // choose sort callback based on sort criteria
 
-  const chooseSortCallback = () => {
-    if (sortCriteria === 'name') {
-      return drugNameSort;
-    } else if (sortCriteria === 'supply') {
-      return drugSupplySort;
-    }
-  };
+  const chooseSortCallback = () =>
+    sortCriteria === 'name' ? drugNameSort : drugSupplySort;
 
   // sort drugs based on criteria
 
@@ -50,6 +45,8 @@ function Home() {
     setAllDrugData((prevData) =>
       prevData.map((drug) => (drug.id === updatedDrug.id ? updatedDrug : drug))
     );
+
+  // render the home page jsx
 
   return (
     <>

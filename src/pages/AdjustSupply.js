@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { drugNameSort } from '../utils/sortFilterFunctions';
+import AdjustSupplyActions from '../components/AdjustSupplyActions';
 
 function DrugActions() {
   // get all drug data from app component context
 
   const [allDrugData] = useOutletContext();
 
-  // set state for selected drug (id: 0 allows for the "please select..." option as default)
+  // set state for selected drug and adjusted quantity
 
   const [selectedDrug, setSelectedDrug] = useState(0);
+  const [adjustedSupply, setAdjustedSupply] = useState(0);
 
   // sort drug data by name
 
@@ -34,6 +36,7 @@ function DrugActions() {
       (drug) => drug.id === parseInt(e.target.value)
     );
     setSelectedDrug(selectedDrugObj);
+    setAdjustedSupply(selectedDrugObj.qtyInStock);
   };
 
   // render page jsx
@@ -46,20 +49,27 @@ function DrugActions() {
         </div>
       </div>
       <div className='row g-3'>
-        <div className='col-6'>
+        <div className='col-6 mx-2'>
           <p className='text-secondary lead'>
             Please select the medication that you'd like to adjust:
           </p>
           <select
             className='form-select'
             size={maxSelectHeight}
-            value={selectedDrug.id}
-            onChange={(e) => handleSelectChange(e)}
+            value={selectedDrug.id || 'placeholder'}
+            onChange={handleSelectChange}
           >
+            <option value='placeholder' disabled hidden>
+              Select a medication...
+            </option>
             {drugOptions}
           </select>
         </div>
-        <div className='col-6'></div>
+        <AdjustSupplyActions
+          selectedDrug={selectedDrug}
+          adjustedSupply={adjustedSupply}
+          setAdjustedSupply={setAdjustedSupply}
+        />
       </div>
     </>
   );

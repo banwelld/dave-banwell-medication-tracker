@@ -35,6 +35,10 @@ will take too much time for this project */
     background-color: var(--mt-blue) !important;
 }
 
+.btn-blue {
+    background-color: var(--mt-blue) !important;
+}
+
 .mt-icon-lg {
     height: 10rem;
 }
