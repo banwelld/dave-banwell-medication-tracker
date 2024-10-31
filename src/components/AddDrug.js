@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import WarningCheckbox from './WarningCheckbox';
-import { fetchOperation } from '../utils/fetchFunction';
+import doAnyFetch from '../utils/fetchFunction';
 import { drugBlueprint, drugWarnings } from '../utils/lists';
 
-function AddDrug({ displayNewDrugObj }) {
+function AddDrug({ addNewDrugToState }) {
   // set state variables
 
   const [newDrugObj, setNewDrugObj] = useState(drugBlueprint);
@@ -23,7 +23,7 @@ function AddDrug({ displayNewDrugObj }) {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    fetchOperation(displayNewDrugObj, 'POST', newDrugObj);
+    doAnyFetch(addNewDrugToState, 'POST', newDrugObj);
     setNewDrugObj(drugBlueprint);
   };
 
@@ -32,19 +32,14 @@ function AddDrug({ displayNewDrugObj }) {
   const doseUnitArr = ['', 'mg', 'ug', 'mcg', 'IU'];
   const drugFormatArr = ['', 'tablet', 'capsule', 'ml'];
 
-  // mapped select option lists
+  // function for mapping basic options lists
 
-  const doseUnitList = doseUnitArr.map((listItem) => (
-    <option key={listItem} value={listItem}>
-      {listItem}
-    </option>
-  ));
-
-  const drugFormatList = drugFormatArr.map((listItem) => (
-    <option key={listItem} value={listItem}>
-      {listItem}
-    </option>
-  ));
+  const basicOptionList = (listArray) =>
+    listArray.map((listItem) => (
+      <option key={listItem} value={listItem}>
+        {listItem}
+      </option>
+    ));
 
   // mapped list of warning checkboxes for the dropdown
 
@@ -116,7 +111,7 @@ function AddDrug({ displayNewDrugObj }) {
             value={newDrugObj.doseUnits}
             onChange={handleInfoChange}
           >
-            {doseUnitList}
+            {basicOptionList(doseUnitArr)}
           </select>
         </div>
         <div className='col'>
@@ -174,7 +169,7 @@ function AddDrug({ displayNewDrugObj }) {
             value={newDrugObj.drugFormat}
             onChange={handleInfoChange}
           >
-            {drugFormatList}
+            {basicOptionList(drugFormatArr)}
           </select>
         </div>
         <div className='col-8'>

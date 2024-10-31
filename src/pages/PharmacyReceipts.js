@@ -1,11 +1,7 @@
 function PharmacyReceipts() {
   return (
     <>
-      <div className='row g-3 mt-3'>
-        <div className='col-12'>
-          <h3>Your pharmacy receipt</h3>
-        </div>
-      </div>
+      <h3 className='my-3'>Your pharmacy receipt</h3>
       <div className='row g-3 mt-3 align-items-center justify-contents-center'>
         <div className='col'>
           <p className='text-secondary lead'>

@@ -7,26 +7,23 @@ import {
   drugNameSort,
   drugSupplySort,
   drugNameFilter,
-} from '../utils/sortFilterFunctions';
+} from '../utils/helperFunctions';
 
 function Home() {
   // get the drug data and setter callback from the app component's outlet
 
   const [allDrugData, setAllDrugData] = useOutletContext();
 
-  // set state for sort (defaulted to name) and filter criteria
+  // set state for sort and filter criteria
 
   const [filterCriteria, setFilterCriteria] = useState('');
-  const [sortCriteria, setSortCriteria] = useState('name');
-
-  // choose sort callback based on sort criteria
-
-  const chooseSortCallback = () =>
-    sortCriteria === 'name' ? drugNameSort : drugSupplySort;
+  const [sortCriteria, setSortCriteria] = useState('name'); // defaulted to 'name'
 
   // sort drugs based on criteria
 
-  const allDrugsSorted = allDrugData.sort(chooseSortCallback());
+  const allDrugsSorted = allDrugData.sort(
+    sortCriteria === 'name' ? drugNameSort : drugSupplySort
+  );
 
   // filter drugs by name for the final, working list
 
@@ -36,21 +33,12 @@ function Home() {
 
   // update drug card list wwith new drug
 
-  const displayNewDrugObj = (newDrugObj) =>
+  const addNewDrugToState = (newDrugObj) =>
     setAllDrugData((prevData) => [...prevData, newDrugObj]);
-
-  // update drug card(s) with revised data
-
-  const displayUpdatedDrug = (updatedDrug) =>
-    setAllDrugData((prevData) =>
-      prevData.map((drug) => (drug.id === updatedDrug.id ? updatedDrug : drug))
-    );
-
-  // render the home page jsx
 
   return (
     <>
-      <div className='accordion mt-3 mb-3' id='homepageAccordion'>
+      <div className='accordion my-3' id='homepageAccordion'>
         <div className='accordion-item'>
           <h2 className='accordion-header' id='accordionSearchHeader'>
             <button
@@ -94,7 +82,7 @@ function Home() {
             data-bs-parent='#homepageAccordion'
           >
             <div className='accordion-body'>
-              <AddDrug displayNewDrugObj={displayNewDrugObj} />
+              <AddDrug addNewDrugToState={addNewDrugToState} />
             </div>
           </div>
         </div>
@@ -105,7 +93,7 @@ function Home() {
         <div className='col-2 bg-danger text-light'>Refill Now!</div>
       </div>
       <DrugCardMatrix
-        displayUpdatedDrug={displayUpdatedDrug}
+        setAllDrugData={setAllDrugData}
         workingDrugList={workingDrugList}
       />
     </>

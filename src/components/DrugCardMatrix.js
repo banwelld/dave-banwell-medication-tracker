@@ -3,14 +3,14 @@ import DrugCard from './DrugCard';
 
 // component function to export
 
-function DrugMatrix({ workingDrugList, displayUpdatedDrug }) {
+function DrugMatrix({ workingDrugList, setAllDrugData }) {
   // map through the drug data and return drug card array
 
   const drugCardList = workingDrugList.map((drugObj) => (
     <DrugCard
       key={drugObj.id}
       drugObj={drugObj}
-      displayUpdatedDrug={displayUpdatedDrug}
+      setAllDrugData={setAllDrugData}
     />
   ));
 

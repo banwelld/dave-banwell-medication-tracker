@@ -1,13 +1,12 @@
 import React from 'react';
 
-function DrugCardInfo({
-  brandName,
-  genericName,
-  drugFormat,
-  dailyQty,
-  daysRemaining,
-  isOptional,
-}) {
+function DrugCardInfo({ drugObj, daysRemaining }) {
+  // destructure drugObj
+
+  const { brandName, genericName, dailyQty, drugFormat, isOptional } = drugObj;
+
+  // render DrugCardInfo component
+
   return (
     <div className='card-body rounded-3'>
       <h5 className='card-title fw-semibold'>{brandName}</h5>

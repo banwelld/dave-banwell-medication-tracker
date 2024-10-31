@@ -2,19 +2,10 @@ import React from 'react';
 import DrugCardInfo from './DrugCardInfo';
 import DrugCardActions from './DrugCardActions';
 
-function DrugCard({ displayUpdatedDrug, drugObj }) {
+function DrugCard({ setAllDrugData, drugObj }) {
   // destructure the drug object
 
-  const {
-    id,
-    imgUrl,
-    brandName,
-    genericName,
-    drugFormat,
-    dailyQty,
-    qtyInStock,
-    isOptional,
-  } = drugObj;
+  const { drugId, brandName, dailyQty, qtyInStock, imgUrl } = drugObj;
 
   // calculate day's supply
 
@@ -30,23 +21,16 @@ function DrugCard({ displayUpdatedDrug, drugObj }) {
       : 'bg-light';
 
   return (
-    <article className='col-3 mt-3 mb-3'>
+    <article className='col-3 my-3'>
       <div className={`card shadow mx-auto width-14 ${cardBgClassName}`}>
-        <div className='row align-items-center p-1 height-14'>
+        <div className='row align-items-center p-2 height-14'>
           <img src={imgUrl} className='card-img-top' alt={brandName} />
         </div>
-        <DrugCardInfo
-          brandName={brandName}
-          genericName={genericName}
-          drugFormat={drugFormat}
-          dailyQty={dailyQty}
-          daysRemaining={daysRemaining}
-          isOptional={isOptional}
-        />
+        <DrugCardInfo drugObj={drugObj} daysRemaining={daysRemaining} />
         <DrugCardActions
-          drugId={id}
+          drugId={drugId}
           qtyInStock={qtyInStock}
-          displayUpdatedDrug={displayUpdatedDrug}
+          setAllDrugData={setAllDrugData}
         />
       </div>
     </article>

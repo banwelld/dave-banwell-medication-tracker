@@ -1,6 +1,6 @@
 // abstracted fetch function for all server interactions
 
-export const fetchOperation = (
+const doAnyFetch = (
   onSuccess,
   method = 'GET',
   pushData = null,
@@ -33,3 +33,5 @@ export const fetchOperation = (
       console.log(err.message);
     });
 };
+
+export default doAnyFetch;
