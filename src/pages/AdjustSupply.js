@@ -1,62 +1,66 @@
 import React, { useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { drugNameSort } from '../utils/helperFunctions';
-import AdjustSupplyForm from '../components/AdjustSupplyForm';
-import AdjustSupplyKeypad from '../components/AdjustSupplyKeypad';
+import AdjustSupplyForm from '../components/AdjustSupplyComponents/AdjustSupplyForm';
 
 function AdjustSupply() {
   // get all drug data from app component context
 
-  const [allDrugData] = useOutletContext();
+  const [allDrugData, setAllDrugData] = useOutletContext();
 
-  // set state for selected drug and adjustment
+  // create object for the placeholder for the drug select field
 
-  const [selectedDrug, setSelectedDrug] = useState('');
-  const [adjustment, setAdjustment] = useState(0);
+  const optionPlaceholder = {
+    id: 0,
+    placeholder: 'Select a medication...',
+  };
 
-  // get supply data from selected drug
+  // set state for drug selection
 
-  const { qtyInStock } = selectedDrug;
+  const [selectedDrug, setSelectedDrug] = useState(optionPlaceholder);
 
-  // calculate working total for the adjusted supply
+  // sort drug data by name for the dropdown list options
 
-  const newSupply = adjustment + qtyInStock || qtyInStock;
+  const allDrugDataSorted = allDrugData.sort(drugNameSort);
 
-  // sort drug data by name
+  // add an element to the list for the initial placeholder
 
-  const allDrugsSorted = allDrugData.sort(drugNameSort);
+  const optionsArray = [optionPlaceholder, ...allDrugDataSorted];
 
-  // selection list for user to choose medication
+  // format the mapped list items
 
-  const drugOptionList = allDrugsSorted.map((drug) => (
-    <option key={drug.id} value={drug.id}>
-      {drug.brandName} ( {drug.genericName} {drug.doseVal} {drug.doseUnits} )
-    </option>
-  ));
+  const optionConstructor = (drug) => {
+    const optionText =
+      drug.id === 0
+        ? drug.placeholder
+        : ` ${drug.brandName} ( ${drug.genericName} ${drug.doseValue} ${drug.doseUnits} )`;
+    return (
+      <option key={drug.id} value={drug.id} disabled={!drug.id ? true : false}>
+        {optionText}
+      </option>
+    );
+  };
+
+  // map drug selection list array
+
+  const optionSelectList = optionsArray.map(optionConstructor);
 
   // update state when user changes the select element
 
   const handleSelectChange = (e) => {
-    const selectedDrugObj = allDrugData.find(
-      (drug) => drug.id === parseInt(e.target.value)
+    const selectedOption = allDrugData.find(
+      (item) => item.id === parseInt(e.target.value)
     );
-    setSelectedDrug(selectedDrugObj);
+    setSelectedDrug({ ...selectedOption });
   };
 
-  // update adjustment amount when user clicks the increment buttons
-
-  const handleIncrementClick = (step) => {
-    if (newSupply + step < 0) {
-      alert('Cannot adjust stock below zero');
-    } else {
-      setAdjustment((prev) => prev + step || step);
-    }
-  };
-
-  // update item in state
+  // update adjusted item in state
 
   const updateItemInState = (updatedItem) => {
     setSelectedDrug({ ...updatedItem });
+    setAllDrugData((prevData) =>
+      prevData.map((item) => (item.id === selectedDrug.id ? updatedItem : item))
+    );
   };
 
   // render adjust suply page
@@ -66,29 +70,24 @@ function AdjustSupply() {
       <h3 className='my-3'>Adjust Medication Supply</h3>
       <div className='row'>
         <div className='col-6 bg-light rounded-3 shadow border'>
-          <div className='row'>
+          <div className='row m-3'>
             <select
               className='form-select'
-              value={selectedDrug.id || 'placeholder'}
+              value={selectedDrug.id}
               onChange={handleSelectChange}
             >
-              <option value='placeholder' disabled>
-                Select a medication...
-              </option>
-              {drugOptionList}
+              {optionSelectList}
             </select>
           </div>
-          <AdjustSupplyForm
-            updateItemInState={updateItemInState}
-            setAdjustment={setAdjustment}
-            adjustment={adjustment}
-            selectedDrug={selectedDrug}
-            newSupply={newSupply}
-          />
-          <AdjustSupplyKeypad
-            setAdjustment={setAdjustment}
-            handleIncrementClick={handleIncrementClick}
-          />
+          {selectedDrug.id !== 0 && (
+            <AdjustSupplyForm
+              updateItemInState={updateItemInState}
+              selectedDrug={selectedDrug}
+              setAllDrugData={setAllDrugData}
+              setSelectedDrug={setSelectedDrug}
+              optionPlaceholder={optionPlaceholder}
+            />
+          )}
         </div>
       </div>
     </>

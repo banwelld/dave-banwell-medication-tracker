@@ -3,7 +3,8 @@
 export const drugNameSort = (a, b) => a.brandName.localeCompare(b.brandName);
 
 export const drugSupplySort = (a, b) =>
-  parseInt(a.qtyInStock / a.dailyQty) - parseInt(b.qtyInStock / b.dailyQty);
+  parseInt(a.currentSupply / a.dailyDoses) -
+  parseInt(b.currentSupply / b.dailyDoses);
 
 // filter callback functions
 

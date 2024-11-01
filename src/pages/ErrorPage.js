@@ -12,10 +12,10 @@ function ErrorPage() {
       </div>
       <div className='col-6 justify-content-center align-items-center align-text-center'>
         <h1 className='text-blue'>Oops, something went wrong...</h1>
-        <h4 className='text-muted'>
-          The page you're looking for doesn't exist.
-        </h4>
-        <p>(ERROR 404)</p>
+        <p className='text-muted lead'>
+          The page you're looking for doesn't exist or doesn't belong to the
+          address that you entered.
+        </p>
       </div>
     </div>
   );

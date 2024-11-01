@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
-import DrugCardMatrix from '../components/DrugCardMatrix';
-import SearchFilter from '../components/SearchFilter';
-import AddDrug from '../components/AddDrug';
+import DrugCardMatrix from '../components/HomepageComponents/DrugCardMatrix';
+import SortFilter from '../components/HomepageComponents/SortFilter';
+import AddDrug from '../components/HomepageComponents/AddDrug';
 import {
   drugNameSort,
   drugSupplySort,
@@ -10,31 +10,33 @@ import {
 } from '../utils/helperFunctions';
 
 function Home() {
-  // get the drug data and setter callback from the app component's outlet
+  // get the drug data state variables from the app component
 
   const [allDrugData, setAllDrugData] = useOutletContext();
 
   // set state for sort and filter criteria
 
-  const [filterCriteria, setFilterCriteria] = useState('');
-  const [sortCriteria, setSortCriteria] = useState('name'); // defaulted to 'name'
+  const [drugFilterCriteria, setDrugFilterCriteria] = useState('');
+  const [drugSortCriteria, setDrugSortCriteria] = useState('name');
 
   // sort drugs based on criteria
 
-  const allDrugsSorted = allDrugData.sort(
-    sortCriteria === 'name' ? drugNameSort : drugSupplySort
+  const allDrugDataSorted = allDrugData.sort(
+    drugSortCriteria === 'name' ? drugNameSort : drugSupplySort
   );
 
   // filter drugs by name for the final, working list
 
-  const workingDrugList = allDrugsSorted.filter((drug) =>
-    drugNameFilter(drug, filterCriteria)
+  const workingDrugList = allDrugDataSorted.filter((drug) =>
+    drugNameFilter(drug, drugFilterCriteria)
   );
 
   // update drug card list wwith new drug
 
-  const addNewDrugToState = (newDrugObj) =>
-    setAllDrugData((prevData) => [...prevData, newDrugObj]);
+  const addNewItemToState = (newDrugObject) =>
+    setAllDrugData((prevData) => [...prevData, newDrugObject]);
+
+  // render the home page component
 
   return (
     <>
@@ -47,7 +49,7 @@ function Home() {
               data-bs-toggle='collapse'
               data-bs-target='#collapseOne'
             >
-              <strong>Search/Filter Medication List</strong>
+              <strong>Sort or Filter Medication List</strong>
             </button>
           </h2>
           <div
@@ -56,11 +58,11 @@ function Home() {
             data-bs-parent='#homepageAccordion'
           >
             <div className='accordion-body'>
-              <SearchFilter
-                sortCriteria={sortCriteria}
-                setSortCriteria={setSortCriteria}
-                filterCriteria={filterCriteria}
-                setFilterCriteria={setFilterCriteria}
+              <SortFilter
+                drugSortCriteria={drugSortCriteria}
+                setDrugSortCriteria={setDrugSortCriteria}
+                drugFilterCriteria={drugFilterCriteria}
+                setDrugFilterCriteria={setDrugFilterCriteria}
               />
             </div>
           </div>
@@ -82,13 +84,13 @@ function Home() {
             data-bs-parent='#homepageAccordion'
           >
             <div className='accordion-body'>
-              <AddDrug addNewDrugToState={addNewDrugToState} />
+              <AddDrug addNewItemToState={addNewItemToState} />
             </div>
           </div>
         </div>
       </div>
       <div className='row text-center align-items-center justify-content-center m-4'>
-        <h4 className='text-secondary'>Legend</h4>
+        <p className='text-secondary lead'>Legend</p>
         <div className='col-2 bg-warning text-dark'>Refill Soon</div>
         <div className='col-2 bg-danger text-light'>Refill Now!</div>
       </div>

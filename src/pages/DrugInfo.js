@@ -11,34 +11,34 @@ function DrugInfo() {
   // get the parameter id
 
   const params = useParams();
-  const drugId = params.id;
+  const targetDrugId = parseInt(params.id);
 
   // assign the drug object with the matching id to a variable
 
-  const drugInfo = allDrugData.find((drug) => drug.id === parseInt(drugId));
+  const drugObject = allDrugData.find((drug) => drug.id === targetDrugId);
 
-  // destructure drugInfo
+  // destructure drugObject
 
   const {
-    imgUrl,
+    imageLink,
     brandName,
     genericName,
     drugFormat,
-    doseVal,
+    doseValue,
     doseUnits,
-    dailyQty,
+    dailyDoses,
     isOptional,
-    qtyInStock,
-  } = drugInfo;
+    currentSupply,
+  } = drugObject;
 
-  // get day's supply (rounded down) from qtyInStock and dailyQty
+  // get day's supply (rounded down) from currentSupply and dailyDoses
 
-  const daysSupply = parseInt(qtyInStock / dailyQty);
+  const daysSupply = parseInt(currentSupply / dailyDoses);
 
   // create a list of the drug's warnings and instructions
 
-  const warningIdList = Object.keys(drugInfo).filter(
-    (key) => drugInfo[key] === true && key !== 'isOptional'
+  const warningIdList = Object.keys(drugObject).filter(
+    (key) => drugObject[key] === true && key !== 'isOptional'
   );
 
   const warningList = warningIdList.map((warningId) => {
@@ -51,35 +51,41 @@ function DrugInfo() {
   // render the component
 
   return (
-    <div>
-      <img
-        src={imgUrl}
-        alt={brandName + 'image'}
-        width='200px'
-        className='mt-3 mb-3'
-      />
-      <h2 className='text-blue'>
-        {brandName}
-        <small>
-          {' '}
-          ({doseVal} {doseUnits})
-        </small>
-      </h2>
-      <h5 className='text-secondary'>{genericName}</h5>
-      <h5>
-        Take {dailyQty} {drugFormat}
-        {dailyQty > 1 && 's'} daily
-        {isOptional && ', as needed'}
-      </h5>
-      <p>
-        Personal Supply: {qtyInStock} dose{qtyInStock !== 1 && 's'} (
-        {daysSupply} day{daysSupply !== 1 && 's'})
-      </p>
-      <h4 className='text-danger'>
-        {warningList.length > 0 && 'Warnings and Additional Instructions'}
-      </h4>
-      <ul>{warningList}</ul>
-    </div>
+    <>
+      <h3 className='my-3 g-6'>Your Medication Details</h3>
+      <div className='row'>
+        <div class='col-4'>
+          <h2 className='text-blue'>{brandName}</h2>
+          <p className='text-secondary lead'>
+            {genericName} ({doseValue} {doseUnits})
+          </p>
+          <h5 className='fw-semibold'>
+            Take {dailyDoses} {drugFormat}
+            {dailyDoses > 1 && 's'} daily
+            {isOptional && ', as needed'}
+          </h5>
+          <p>
+            Current Supply: {currentSupply} dose{currentSupply !== 1 && 's'} (
+            {daysSupply} day{daysSupply !== 1 && 's'})
+          </p>
+          <div className='container bg-warning shadow rounded-3 border p-3'>
+            <h5>
+              {warningList.length > 0
+                ? 'Warnings and Instructions'
+                : 'No warnings for this medication'}
+            </h5>
+            <ul>{warningList}</ul>
+          </div>
+        </div>
+        <div className='col-2'>
+          <img
+            src={imageLink}
+            alt={brandName}
+            className='drug-info-image img-fluid'
+          />
+        </div>
+      </div>
+    </>
   );
 }
 

@@ -5,7 +5,7 @@ function NavBar() {
   return (
     <nav className='navbar navbar-expand-lg navbar-dark fs-4'>
       <div className='container-fluid'>
-        <NavLink className='navbar-brand' to='/'>
+        <NavLink className='navbar-brand' to='/Home'>
           <img
             src='/images/MedTrackerIcon.png'
             className='mt-icon-sm'

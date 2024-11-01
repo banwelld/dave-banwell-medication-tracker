@@ -2,7 +2,7 @@ function PharmacyReceipts() {
   return (
     <>
       <h3 className='my-3'>Your pharmacy receipt</h3>
-      <div className='row g-3 mt-3 align-items-center justify-contents-center'>
+      <div className='row mt-3 align-items-center justify-contents-center'>
         <div className='col'>
           <p className='text-secondary lead'>
             Pharmacy receipts can be confusing...

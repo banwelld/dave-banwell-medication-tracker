@@ -1,33 +1,33 @@
 import React from 'react';
 
-function SearchFilter({
-  sortCriteria,
-  setSortCriteria,
-  filterCriteria,
-  setFilterCriteria,
+function SortFilter({
+  drugSortCriteria,
+  setDrugSortCriteria,
+  drugFilterCriteria,
+  setDrugFilterCriteria,
 }) {
-  // render component jsx
+  // render the sort filter component
 
   return (
-    <div className='row g-3'>
+    <div className='row'>
       <div className='col-12'>
-        <div className='row justify-contents-center g-3 mb-2'>
+        <div className='row justify-contents-center mb-2'>
           <div className='col-8'>
             <input
               id='nameFilter'
               type='text'
               className='form-control'
-              value={filterCriteria}
-              placeholder='Filter by brand or generic name...'
-              onChange={(e) => setFilterCriteria(e.target.value)}
+              value={drugFilterCriteria}
+              placeholder='Filter by name (brand or generic)...'
+              onChange={(e) => setDrugFilterCriteria(e.target.value)}
             />
           </div>
           <div className='col-4'>
             <select
               id='sortSelect'
               className='form-select'
-              value={sortCriteria}
-              onChange={(e) => setSortCriteria(e.target.value)}
+              value={drugSortCriteria}
+              onChange={(e) => setDrugSortCriteria(e.target.value)}
             >
               <option value='name'>Sort by brand name</option>
               <option value='supply'>Sort by days supply</option>
@@ -39,4 +39,4 @@ function SearchFilter({
   );
 }
 
-export default SearchFilter;
+export default SortFilter;

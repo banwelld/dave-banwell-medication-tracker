@@ -1,21 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import doAnyFetch from '../utils/fetchFunction';
+import doAnyFetch from '../../utils/fetchFunction';
 
-function DrugCardActions({ drugId, qtyInStock, setAllDrugData }) {
-  // update state after fetch request
+function DrugCardActions({ drugId, currentSupply, setAllDrugData }) {
+  // state update to be triggered by fetch request
 
   const updateArrayItemInState = (updatedItem) => {
     setAllDrugData((prevData) =>
-      prevData.map((item) => (item.id === updatedItem.id ? updatedItem : item))
+      prevData.map((item) => (item.id === drugId ? updatedItem : item))
     );
   };
 
-  // deduct 1 from the drug's qtyInStock
+  // deduct 1 from the drug's current supply if current supply is available
 
   const takeNowClick = () => {
-    console.log(updateArrayItemInState());
-    if (!qtyInStock) {
+    if (!currentSupply) {
       alert(
         "You do not have any of this medication in stock. Please visit the drug's info page to update your stock if you've refilled it."
       );
@@ -23,14 +22,14 @@ function DrugCardActions({ drugId, qtyInStock, setAllDrugData }) {
       doAnyFetch(
         updateArrayItemInState,
         'PATCH',
-        { qtyInStock: qtyInStock - 1 },
+        { currentSupply: currentSupply - 1 },
         drugId
       );
     }
   };
 
   return (
-    <div className='p-3'>
+    <div className='px-3 pb-3'>
       <button className='btn btn-blue shadow container' onClick={takeNowClick}>
         Take Now
       </button>
