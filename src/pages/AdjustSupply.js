@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { drugNameSort } from '../utils/helperFunctions';
-import AdjustSupplyForm from '../components/AdjustSupplyComponents/AdjustSupplyForm';
+import AdjustSupplyForm from '../components/AdjustSupply/AdjustSupplyForm';
 
 function AdjustSupply() {
   // get all drug data from app component context

@@ -1,37 +1,29 @@
-// abstracted fetch function for all server interactions
+// abstracted fetch function that takes in parameters and conducts any fetch operation based on the included parameters
 
-const doAnyFetch = (
-  onSuccess,
-  method = 'GET',
-  pushData = null,
-  id = null,
-  endpoint = 'medications'
-) => {
-  // customize fetch options based on function arguments
-
+const doFetch = (method = 'GET', data = null, id = '') => {
+  const SERVER_URL = `http://localhost:6001/medications/${id}`;
+  console.log(SERVER_URL);
   const options = {
-    method,
+    method: method,
     headers: { 'Content-Type': 'application/json' },
-    body: pushData ? JSON.stringify(pushData) : null,
+    body: data && JSON.stringify(data),
   };
 
-  // perform fetch operation and handle response
+  const handleFetchResponse = (response) => {
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+    return response.json();
+  };
 
-  fetch(`http://localhost:6001/${endpoint}${id ? '/' + id : ''}`, options)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then((data) => {
-      if (onSuccess) {
-        onSuccess(data);
-      }
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
+  const handleError = (err) => {
+    alert('Error in fetching data. See the console for details.');
+    console.log(err.message);
+  };
+
+  return fetch(SERVER_URL, options)
+    .then(handleFetchResponse)
+    .catch(handleError);
 };
 
-export default doAnyFetch;
+export default doFetch;

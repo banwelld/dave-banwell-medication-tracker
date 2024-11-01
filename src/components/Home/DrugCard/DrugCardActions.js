@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import doAnyFetch from '../../utils/fetchFunction';
+import doFetch from '../../../utils/fetchFunction';
 
 function DrugCardActions({ drugId, currentSupply, setAllDrugData }) {
   // state update to be triggered by fetch request
@@ -14,16 +14,13 @@ function DrugCardActions({ drugId, currentSupply, setAllDrugData }) {
   // deduct 1 from the drug's current supply if current supply is available
 
   const takeNowClick = () => {
-    if (!currentSupply) {
+    if (!(currentSupply > 0)) {
       alert(
         "You do not have any of this medication in stock. Please visit the drug's info page to update your stock if you've refilled it."
       );
     } else {
-      doAnyFetch(
-        updateArrayItemInState,
-        'PATCH',
-        { currentSupply: currentSupply - 1 },
-        drugId
+      doFetch('PATCH', { currentSupply: currentSupply - 1 }, drugId).then(
+        updateArrayItemInState
       );
     }
   };

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
-import DrugCardMatrix from '../components/HomepageComponents/DrugCardMatrix';
-import SortFilter from '../components/HomepageComponents/SortFilter';
-import AddDrug from '../components/HomepageComponents/AddDrug';
+import DrugCardMatrix from '../components/Home/DrugCardMatrix';
+import SortFilter from '../components/Home/SortFilter';
+import AddDrug from '../components/Home/AddDrug';
 import {
   drugNameSort,
   drugSupplySort,

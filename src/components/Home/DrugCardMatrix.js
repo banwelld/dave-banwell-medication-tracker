@@ -1,5 +1,5 @@
 import React from 'react';
-import DrugCard from '../DrugCardComponents/DrugCard';
+import DrugCard from './DrugCard/DrugCard';
 
 function DrugMatrix({ workingDrugList, setAllDrugData }) {
   // map drug data to drug card array

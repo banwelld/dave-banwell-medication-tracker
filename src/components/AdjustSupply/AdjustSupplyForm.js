@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import doAnyFetch from '../../utils/fetchFunction';
+import doFetch from '../../utils/fetchFunction';
 import AdjustSupplyKeypad from './AdjustSupplyKeypad';
 
 function AdjustSupplyForm({
@@ -34,16 +34,14 @@ function AdjustSupplyForm({
 
   const handleSubmitClick = (e) => {
     e.preventDefault();
-    doAnyFetch(
-      updateItemInState,
-      'PATCH',
-      { currentSupply: currentSupply + supplyAdjustment },
-      selectedDrug.id
+    doFetch('PATCH', { currentSupply: newSupply }, selectedDrug.id).then(
+      updateItemInState
     );
     setSupplyAdjustment(0);
   };
 
   // callback to enable fetch request to update state
+
   const removeItemsFromState = () => {
     setAllDrugData((prev) =>
       prev.filter((item) => item.id !== parseInt(selectedDrug.id))
@@ -55,7 +53,7 @@ function AdjustSupplyForm({
   // delete drug record from server and trigger state changes
 
   const handleDeleteDrugClick = () =>
-    doAnyFetch(removeItemsFromState, 'DELETE', null, selectedDrug.id);
+    doFetch('DELETE', null, selectedDrug.id).then(removeItemsFromState);
 
   // update adjustment amount when user changes the adjustment field
 
@@ -74,7 +72,9 @@ function AdjustSupplyForm({
     if (newSupply + step < 0) {
       alert('Supply cannot be less than zero');
     } else {
-      setSupplyAdjustment((prev) => prev + step || step); // handles instances where supplyAdjustment is blank
+      setSupplyAdjustment(
+        (prev) => (isNaN(prev) ? step : prev + step) // handles instances where supplyAdjustment is blank
+      );
     }
   };
 

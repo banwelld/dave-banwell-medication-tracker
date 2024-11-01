@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import WarningCheckbox from './WarningCheckbox';
-import doAnyFetch from '../../utils/fetchFunction';
+import doFetch from '../../utils/fetchFunction';
 import { drugBlueprint, drugWarnings } from '../../utils/lists';
 
 function AddDrug({ addNewItemToState }) {
@@ -30,7 +30,7 @@ function AddDrug({ addNewItemToState }) {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    doAnyFetch(addNewItemToState, 'POST', newDrugObject);
+    doFetch('POST', newDrugObject).then(addNewItemToState);
     setNewDrugObject(drugBlueprint);
   };
 

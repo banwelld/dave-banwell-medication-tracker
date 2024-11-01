@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../components/AppComponents/Header';
+import Header from '../components/App/Header';
 import { Outlet } from 'react-router-dom';
-import doAnyFetch from '../utils/fetchFunction';
+import doFetch from '../utils/fetchFunction';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
@@ -13,7 +13,7 @@ function App() {
   // fetch drug data from server
 
   useEffect(() => {
-    doAnyFetch((data) => setAllDrugData(data));
+    doFetch().then((data) => setAllDrugData(data));
   }, []);
 
   // return the App component
