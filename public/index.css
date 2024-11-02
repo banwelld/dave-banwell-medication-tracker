@@ -1,42 +1,12 @@
-/* although it's better to find conflicts rather than employ the important
-declaration, i'm using it for the bootstrap accordion and the form buttons
-since digging into bootstrap's documentation to find variable information
-will take too much time for this project */
-
 :root {
-    --mt-blue: #54B4D3;
-    --mt-blue-hover: #50ABC8;
-    --mt-blue-shadow: rgba(84, 180, 211, 0.5);
-}
-
-.accordion-button {
-    background-color: var(--mt-blue) !important;
-}
-
-.accordion-button:focus {
-    outline: none !important;
-    border: none !important;
-    box-shadow: 0 0 0 4px var(--mt-blue-shadow) !important;
-}
-
-.accordion-button:hover {
-    background-color: var(--mt-blue-hover) !important;
+    --mt-blue: rgb(84, 180, 211);
+    --mt-blue-hover: rgb(80, 171, 200);
+    --mt-blue-shadow: rgba(84, 180, 211, 0.4);
+    --mt-blue-highlight: 0 0 2px 3px var(--mt-blue-shadow);
 }
 
 .navbar {
     background-color: var(--mt-blue);
-}
-
-.text-blue {
-    color: var(--mt-blue) !important;
-}
-
-.bg-blue {
-    background-color: var(--mt-blue) !important;
-}
-
-.btn-blue {
-    background-color: var(--mt-blue) !important;
 }
 
 .mt-icon-lg {
@@ -49,20 +19,4 @@ will take too much time for this project */
 
 .mt-icon-sm {
     width: 1rem;
-}
-
-.err-pg-container {
-    height: 100vh;
-}
-
-.width-14 {
-    width: 14rem;
-}
-
-.height-14 {
-    height: 14rem;
-}
-
-.warning-dropdown {
-    width: 20rem;
 }

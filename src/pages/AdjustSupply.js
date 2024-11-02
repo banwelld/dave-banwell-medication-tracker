@@ -58,39 +58,37 @@ function AdjustSupply() {
 
   const updateItemInState = (updatedItem) => {
     setSelectedDrug({ ...updatedItem });
-    setAllDrugData((prevData) =>
-      prevData.map((item) => (item.id === selectedDrug.id ? updatedItem : item))
+    setAllDrugData((prev) =>
+      prev.map((item) => (item.id === selectedDrug.id ? updatedItem : item))
     );
   };
 
   // render adjust suply page
 
   return (
-    <>
-      <h3 className='my-3'>Adjust Medication Supply</h3>
-      <div className='row'>
-        <div className='col-6 bg-light rounded-3 shadow border'>
-          <div className='row m-3'>
-            <select
-              className='form-select'
-              value={selectedDrug.id}
-              onChange={handleSelectChange}
-            >
-              {optionSelectList}
-            </select>
-          </div>
-          {selectedDrug.id !== 0 && (
-            <AdjustSupplyForm
-              updateItemInState={updateItemInState}
-              selectedDrug={selectedDrug}
-              setAllDrugData={setAllDrugData}
-              setSelectedDrug={setSelectedDrug}
-              optionPlaceholder={optionPlaceholder}
-            />
-          )}
+    <div className='row my-3 justify-contents-center'>
+      <h3>Adjust Medication Supply</h3>
+      <div className='col-6 my-3 bg-light rounded-3 shadow border'>
+        <div className='row m-3'>
+          <select
+            className='form-select'
+            value={selectedDrug.id}
+            onChange={handleSelectChange}
+          >
+            {optionSelectList}
+          </select>
         </div>
+        {selectedDrug.id !== 0 && (
+          <AdjustSupplyForm
+            updateItemInState={updateItemInState}
+            selectedDrug={selectedDrug}
+            setAllDrugData={setAllDrugData}
+            setSelectedDrug={setSelectedDrug}
+            optionPlaceholder={optionPlaceholder}
+          />
+        )}
       </div>
-    </>
+    </div>
   );
 }
 export default AdjustSupply;

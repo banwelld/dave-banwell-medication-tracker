@@ -1,0 +1,27 @@
+.home-input {
+    border: solid 2px var(--mt-blue);
+}
+
+.btn-blue,
+.accordion-button {
+    background-color: var(--mt-blue) !important;
+}
+
+.btn-blue:hover {
+    background-color: var(--mt-blue-hover);
+}
+
+.home-input:hover,
+.accordion-button:focus,
+.accordion-button:active {
+    box-shadow: var(--mt-blue-highlight);
+}
+
+.warning-dropdown {
+    width: 20rem;
+}
+
+.form-label {
+    font-size: small;
+    margin-bottom: 3px;
+}

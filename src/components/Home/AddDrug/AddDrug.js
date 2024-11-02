@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import WarningCheckbox from './WarningCheckbox';
-import doFetch from '../../utils/fetchFunction';
-import { drugBlueprint, drugWarnings } from '../../utils/lists';
+import doFetch from '../../../utils/fetchFunction';
+import { drugBlueprint } from '../../../utils/lists';
+import WarningSelect from './WarningSelect';
 
 function AddDrug({ addNewItemToState }) {
   // set the new drug blueprint to state
@@ -26,12 +26,30 @@ function AddDrug({ addNewItemToState }) {
     setNewDrugObject({ ...newDrugObject, [id]: attribValue });
   };
 
+  // track the empty, non-boolean fields
+
+  const nonBooleanKeys = Object.keys(newDrugObject).filter(
+    (key) => typeof newDrugObject[key] !== 'boolean'
+  );
+
+  const falseyNonBoolean = nonBooleanKeys.filter((key) => {
+    const value = newDrugObject[key];
+    return !value && value !== 'false';
+  });
+
   // send new drug data to server, update state, and reset form with drug blueprint
 
   const handleFormSubmit = (e) => {
-    e.preventDefault();
-    doFetch('POST', newDrugObject).then(addNewItemToState);
-    setNewDrugObject(drugBlueprint);
+    if (!falseyNonBoolean.length) {
+      e.preventDefault();
+      doFetch('POST', newDrugObject).then(addNewItemToState);
+      setNewDrugObject(drugBlueprint);
+    } else {
+      e.preventDefault();
+      alert(
+        `There are empty fields on the form. Please enter all information before submitting.`
+      );
+    }
   };
 
   // select list arrays to populate options (if lists grow, consider moving to helper file)
@@ -48,52 +66,34 @@ function AddDrug({ addNewItemToState }) {
       </option>
     ));
 
-  // mapped list of warning checkboxes for the dropdown
-
-  const drugWarningChecklist = drugWarnings.map((warning) => (
-    <WarningCheckbox
-      key={warning.id}
-      id={warning.id}
-      labelText={warning.labelText}
-      checked={newDrugObject[warning.id]}
-      handleFieldValueChange={handleFieldValueChange}
-    />
-  ));
-
   // render the add drug component
 
   return (
-    <form className='p-3' onSubmit={handleFormSubmit}>
+    <form className='p' onSubmit={handleFormSubmit}>
       <div className='row'>
-        <div className='col-2'>
+        <div className='col-3'>
           <label htmlFor='brandName' className='form-label'>
-            Brand Name
+            Brand Name (e.g., Lipitor)
           </label>
           <input
             type='text'
-            className='form-control'
+            className='form-control home-input'
             id='brandName'
             value={newDrugObject.brandName}
             onChange={handleFieldValueChange}
           />
-          <div id='brandNameHelp' className='form-text'>
-            E.g., Lipitor
-          </div>
         </div>
         <div className='col-3'>
           <label htmlFor='genericName' className='form-label'>
-            Generic/Chemical Name
+            Generic Name (e.g., Atorvastatin)
           </label>
           <input
             type='text'
-            className='form-control'
+            className='form-control home-input'
             id='genericName'
             value={newDrugObject.genericName}
             onChange={handleFieldValueChange}
           />
-          <div id='genericNameHelp' className='form-text'>
-            E.g., Atorvastatin
-          </div>
         </div>
         <div className='col'>
           <label htmlFor='doseValue' className='form-label'>
@@ -102,7 +102,7 @@ function AddDrug({ addNewItemToState }) {
           <input
             type='number'
             step='1'
-            className='form-control'
+            className='form-control home-input'
             id='doseValue'
             value={newDrugObject.doseValue}
             onChange={handleFieldValueChange}
@@ -114,57 +114,31 @@ function AddDrug({ addNewItemToState }) {
           </label>
           <select
             id='doseUnits'
-            className='form-select'
+            className='form-select home-input'
             value={newDrugObject.doseUnits}
             onChange={handleFieldValueChange}
           >
             {basicOptionList(doseUnitArr)}
           </select>
         </div>
-        <div className='col'>
+        <div className='col-3'>
+          <WarningSelect
+            handleFieldValueChange={handleFieldValueChange}
+            newDrugObject={newDrugObject}
+          />
+        </div>
+      </div>
+      <div className='row mt-3'>
+        <div className='col-2'>
           <label htmlFor='dailyDoses' className='form-label'>
             Daily Doses
           </label>
           <input
             type='number'
             step='1'
-            className='form-control'
+            className='form-control home-input'
             id='dailyDoses'
             value={newDrugObject.dailyDoses}
-            onChange={handleFieldValueChange}
-          />
-        </div>
-        <div className='col-3'>
-          <label htmlFor='warningDropdown' className='form-label'>
-            Warnings/Instructions
-          </label>
-          <div className='btn-group container p-0'>
-            <button
-              className='btn text-light dropdown-toggle bg-blue'
-              type='button'
-              id='warningDropdown'
-              data-bs-toggle='dropdown'
-              data-bs-auto-close='outside'
-            >
-              Select All Applicable
-            </button>
-            <div className='dropdown-menu p-2 warning-dropdown'>
-              {drugWarningChecklist}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className='row mt-3'>
-        <div className='col-2'>
-          <label htmlFor='currentSupply' className='form-label'>
-            Current Supply
-          </label>
-          <input
-            type='number'
-            step='1'
-            className='form-control'
-            id='currentSupply'
-            value={newDrugObject.currentSupply}
             onChange={handleFieldValueChange}
           />
         </div>
@@ -174,37 +148,50 @@ function AddDrug({ addNewItemToState }) {
           </label>
           <select
             id='drugFormat'
-            className='form-select'
+            className='form-select home-input'
             value={newDrugObject.drugFormat}
             onChange={handleFieldValueChange}
           >
             {basicOptionList(drugFormatArr)}
           </select>
         </div>
-        <div className='col-8'>
+        <div className='col-2'>
+          <label htmlFor='currentSupply' className='form-label'>
+            Current Supply
+          </label>
+          <input
+            type='number'
+            step='1'
+            className='form-control home-input'
+            id='currentSupply'
+            value={newDrugObject.currentSupply}
+            onChange={handleFieldValueChange}
+          />
+        </div>
+        <div className='col'>
           <label className='form-label' htmlFor='imageLink'>
             Link to Medication Image
           </label>
           <input
             type='text'
-            className='form-control'
+            className='form-control home-input'
             id='imageLink'
             value={newDrugObject.imageLink}
             onChange={handleFieldValueChange}
           />
           <div id='genericNameHelp' className='form-text'>
-            E.g., http://www.image.com/image.jpg
+            <small>E.g., http://www.image.com/image.jpg</small>
           </div>
         </div>
       </div>
       <div className='row mt-3'>
-        <div className='col-12'>
-          <button type='submit' className='btn text-light bg-blue'>
+        <div className='col'>
+          <button type='submit' className='btn me-3 text-light btn-blue'>
             Add Medication
           </button>
           <button
             type='reset'
-            className='btn text-light bg-blue ms-3'
+            className='btn text-light btn-blue'
             onClick={() => setNewDrugObject({ ...drugBlueprint })}
           >
             Reset Form

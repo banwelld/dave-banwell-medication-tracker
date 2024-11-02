@@ -1,6 +1,7 @@
 import React from 'react';
 import DrugCardInfo from './DrugCardInfo';
 import DrugCardActions from './DrugCardActions';
+import '../../../css/DrugCard.css';
 
 function DrugCard({ setAllDrugData, drugObject }) {
   // destructure the drug object

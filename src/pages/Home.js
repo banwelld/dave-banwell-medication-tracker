@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
-import DrugCardMatrix from '../components/Home/DrugCardMatrix';
+import DrugCardMatrix from '../components/Home/DrugDisplay';
 import SortFilter from '../components/Home/SortFilter';
-import AddDrug from '../components/Home/AddDrug';
+import Accordion from '../components/Home/AddDrug/Accordion';
 import {
   drugNameSort,
   drugSupplySort,
   drugNameFilter,
 } from '../utils/helperFunctions';
+import '../css/Home.css';
 
 function Home() {
   // get the drug data state variables from the app component
@@ -31,63 +32,24 @@ function Home() {
     drugNameFilter(drug, drugFilterCriteria)
   );
 
-  // update drug card list wwith new drug
+  // add new drug to state
 
-  const addNewItemToState = (newDrugObject) =>
-    setAllDrugData((prevData) => [...prevData, newDrugObject]);
+  const addNewItemToState = (item) => setAllDrugData((prev) => [...prev, item]);
 
   // render the home page component
 
   return (
     <>
-      <div className='accordion my-3' id='homepageAccordion'>
-        <div className='accordion-item'>
-          <h2 className='accordion-header' id='accordionSearchHeader'>
-            <button
-              className='accordion-button text-light collapsed'
-              type='button'
-              data-bs-toggle='collapse'
-              data-bs-target='#collapseOne'
-            >
-              <strong>Sort or Filter Medication List</strong>
-            </button>
-          </h2>
-          <div
-            id='collapseOne'
-            className='accordion-collapse collapse'
-            data-bs-parent='#homepageAccordion'
-          >
-            <div className='accordion-body'>
-              <SortFilter
-                drugSortCriteria={drugSortCriteria}
-                setDrugSortCriteria={setDrugSortCriteria}
-                drugFilterCriteria={drugFilterCriteria}
-                setDrugFilterCriteria={setDrugFilterCriteria}
-              />
-            </div>
-          </div>
-        </div>
-        <div className='accordion-item'>
-          <h2 className='accordion-header' id='accordionAddDrugHeader'>
-            <button
-              className='accordion-button text-light collapsed'
-              type='button'
-              data-bs-toggle='collapse'
-              data-bs-target='#collapseTwo'
-            >
-              <strong>Add Medication to List</strong>
-            </button>
-          </h2>
-          <div
-            id='collapseTwo'
-            className='accordion-collapse collapse'
-            data-bs-parent='#homepageAccordion'
-          >
-            <div className='accordion-body'>
-              <AddDrug addNewItemToState={addNewItemToState} />
-            </div>
-          </div>
-        </div>
+      <div className='row mt-3 justify-content-center align-items-center'>
+        <SortFilter
+          drugSortCriteria={drugSortCriteria}
+          setDrugSortCriteria={setDrugSortCriteria}
+          drugFilterCriteria={drugFilterCriteria}
+          setDrugFilterCriteria={setDrugFilterCriteria}
+        />
+      </div>
+      <div className='row px-3 justify-content-center align-items-center'>
+        <Accordion addNewItemToState={addNewItemToState} />
       </div>
       <div className='row text-center align-items-center justify-content-center m-4'>
         <p className='text-secondary lead'>Legend</p>

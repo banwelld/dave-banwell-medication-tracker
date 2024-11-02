@@ -2,7 +2,6 @@
 
 const doFetch = (method = 'GET', data = null, id = '') => {
   const SERVER_URL = `http://localhost:6001/medications/${id}`;
-  console.log(SERVER_URL);
   const options = {
     method: method,
     headers: { 'Content-Type': 'application/json' },

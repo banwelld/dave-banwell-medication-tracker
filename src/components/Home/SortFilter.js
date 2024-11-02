@@ -9,31 +9,35 @@ function SortFilter({
   // render the sort filter component
 
   return (
-    <div className='row'>
-      <div className='col-12'>
-        <div className='row justify-contents-center mb-2'>
-          <div className='col-8'>
-            <input
-              id='nameFilter'
-              type='text'
-              className='form-control'
-              value={drugFilterCriteria}
-              placeholder='Filter by name (brand or generic)...'
-              onChange={(e) => setDrugFilterCriteria(e.target.value)}
-            />
-          </div>
-          <div className='col-4'>
-            <select
-              id='sortSelect'
-              className='form-select'
-              value={drugSortCriteria}
-              onChange={(e) => setDrugSortCriteria(e.target.value)}
-            >
-              <option value='name'>Sort by brand name</option>
-              <option value='supply'>Sort by days supply</option>
-            </select>
-          </div>
-        </div>
+    <div className='row justify-contents-center'>
+      <div className='col'>
+        <select
+          id='sortSelect'
+          className='form-select home-input'
+          value={drugSortCriteria}
+          onChange={(e) => setDrugSortCriteria(e.target.value)}
+        >
+          <option value='name'>Sort by brand name</option>
+          <option value='supply'>Sort by days supply</option>
+        </select>
+      </div>
+      <div className='col input-group'>
+        <input
+          id='nameFilter'
+          type='text'
+          className='form-control home-input'
+          value={drugFilterCriteria}
+          placeholder='Filter by name (brand or generic)...'
+          onChange={(e) => setDrugFilterCriteria(e.target.value)}
+        />
+        <button
+          className='btn btn-blue text-light'
+          type='button'
+          id='button-addon'
+          onClick={() => setDrugFilterCriteria('')}
+        >
+          Clear Filter
+        </button>
       </div>
     </div>
   );
