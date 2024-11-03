@@ -184,19 +184,17 @@ function AddDrug({ addNewItemToState }) {
           </div>
         </div>
       </div>
-      <div className='row mt-3'>
-        <div className='col'>
-          <button type='submit' className='btn me-3 text-light btn-blue'>
-            Add Medication
-          </button>
-          <button
-            type='reset'
-            className='btn text-light btn-blue'
-            onClick={() => setNewDrugObject({ ...drugBlueprint })}
-          >
-            Reset Form
-          </button>
-        </div>
+      <div class='d-grid mt-3 gap-2 d-md-flex justify-content-md-end'>
+        <button type='submit' className='btn me-3 text-light btn-blue'>
+          Add Medication
+        </button>
+        <button
+          type='reset'
+          className='btn text-light btn-blue'
+          onClick={() => setNewDrugObject({ ...drugBlueprint })}
+        >
+          Reset Form
+        </button>
       </div>
     </form>
   );
