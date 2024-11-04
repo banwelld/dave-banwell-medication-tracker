@@ -54,7 +54,7 @@ function DrugInfo() {
     <>
       <h3 className='my-3 g-6'>Your Medication Details</h3>
       <div className='row'>
-        <div class='col-4'>
+        <div className='col-4'>
           <h2 className='text-blue'>{brandName}</h2>
           <p className='text-secondary lead'>
             {genericName} ({doseValue} {doseUnits})

@@ -20,3 +20,62 @@
 .mt-icon-sm {
     width: 1rem;
 }
+
+.form-label {
+    font-size: small;
+    margin-bottom: 3px;
+}
+
+.warning-dropdown {
+    width: 20rem;
+}
+
+.err-pg-container {
+    height: 100vh;
+}
+
+.text-blue {
+    color: var(--mt-blue);
+}
+
+.width-14 {
+    width: 14rem;
+}
+
+.height-14 {
+    height: 14rem;
+}
+
+.modal-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.modal-header{
+    color: #fff;
+    background-color: var(--mt-blue);
+    padding: 10px;
+    border-radius: 5px 5px 0 0;
+}
+
+.modal-content {
+    color: #000;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 0 0 5px 5px;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}

@@ -1,7 +1,6 @@
 import React from 'react';
 import DrugCardInfo from './DrugCardInfo';
 import DrugCardActions from './DrugCardActions';
-import '../../../css/DrugCard.css';
 
 function DrugCard({ setAllDrugData, drugObject }) {
   // destructure the drug object
@@ -31,7 +30,7 @@ function DrugCard({ setAllDrugData, drugObject }) {
     <article className='col-3 my-3'>
       <div className={`card shadow m-auto width-14 ${dynamicBg}`}>
         <div className='row align-items-center height-14 p-2'>
-          <img src={imageLink} className='card-img-top' alt={brandName} />
+          <img src={imageLink} className='card-image-top' alt={brandName} />
         </div>
         <DrugCardInfo drugObject={drugObject} daysRemaining={daysRemaining} />
         <DrugCardActions

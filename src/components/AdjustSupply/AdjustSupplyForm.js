@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import doFetch from '../../utils/fetchFunction';
 import AdjustSupplyKeypad from './AdjustSupplyKeypad';
+import { modalContent } from '../../utils/lists';
+import MessageModal from '../Modals/MessageModal';
 
 function AdjustSupplyForm({
   selectedDrug,
@@ -9,9 +11,14 @@ function AdjustSupplyForm({
   setSelectedDrug,
   optionPlaceholder,
 }) {
-  // set state for supply adjustment amount
+  // set state for supply adjustment amount and error modal
 
   const [supplyAdjustment, setSupplyAdjustment] = useState(0);
+  const [lessThanZeroModalOpen, setLessThanZeroModalOpen] = useState(false);
+
+  // set the less than zero modal content to a variable
+
+  const lessThanZeroModalContent = modalContent.AdjustSupplyForm.lessThanZero;
 
   // destructure necessary data from selectedDrug
 
@@ -59,8 +66,7 @@ function AdjustSupplyForm({
 
   const handleAdjInputChange = (e) => {
     if (currentSupply + parseInt(e.target.value) < 0) {
-      alert('Cannot adjust stock below zero. Please start over');
-      setSupplyAdjustment(0);
+      setLessThanZeroModalOpen(true);
     } else {
       setSupplyAdjustment(parseInt(e.target.value));
     }
@@ -70,7 +76,7 @@ function AdjustSupplyForm({
 
   const handleIncrementClick = (step) => {
     if (newSupply + step < 0) {
-      alert('Supply cannot be less than zero');
+      setLessThanZeroModalOpen(true);
     } else {
       setSupplyAdjustment(
         (prev) => (isNaN(prev) ? step : prev + step) // handles instances where supplyAdjustment is blank
@@ -141,6 +147,11 @@ function AdjustSupplyForm({
         setSupplyAdjustment={setSupplyAdjustment}
         handleIncrementClick={handleIncrementClick}
         handleDeleteDrugClick={handleDeleteDrugClick}
+      />
+      <MessageModal
+        isOpen={lessThanZeroModalOpen}
+        content={lessThanZeroModalContent}
+        close={() => setLessThanZeroModalOpen(false)}
       />
     </>
   );

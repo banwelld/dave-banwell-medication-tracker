@@ -80,3 +80,28 @@ export const drugBlueprint = {
   noDriving: false,
   imageLink: '',
 };
+
+// error titles and messages for modals in the project
+export const modalContent = {
+  DrugCardActions: {
+    noSupply: {
+      title: 'Medication not available!',
+      message:
+        'Your supply of this medication is set to 0. Be sure to visit your pharmacy and have it refilled soon. If you\'ve recently refilled this medication but haven\'t uupdated your supply, pease visit the "Adjust Supply" page before indicating a taken dose.',
+    },
+  },
+  AddDrug: {
+    emptyFields: {
+      title: 'Form incomplete!',
+      message:
+        'You have left one or more of the fields in the form empty. In order to track your medication stock and compliance, you must include all of the requested information. Please ensure all fields contain the requested information and then click "Submit".',
+    },
+  },
+  AdjustSupplyForm: {
+    lessThanZero: {
+      title: 'Deduction exceeds supply!',
+      message:
+        'You cannot adjust your supply to be less than zero. Please try again.',
+    },
+  },
+};

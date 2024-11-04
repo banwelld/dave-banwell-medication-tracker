@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import MessageModal from '../../Modals/MessageModal';
 import doFetch from '../../../utils/fetchFunction';
+import { modalContent } from '../../../utils/lists';
 
 function DrugCardActions({ drugId, currentSupply, setAllDrugData }) {
+  // set state for the no supply modal
+
+  const [noSupplyModalOpen, setNoSupplyModalOpen] = useState(false);
+
+  // assign the messages for the modal to a variable
+
+  const noSupplyModalContent = modalContent.DrugCardActions.noSupply;
+
   // state update to be triggered by fetch request
 
   const updateArrayItemInState = (updatedItem) => {
@@ -15,9 +25,7 @@ function DrugCardActions({ drugId, currentSupply, setAllDrugData }) {
 
   const takeNowClick = () => {
     if (!(currentSupply > 0)) {
-      alert(
-        "You do not have any of this medication in stock. Please visit the drug's info page to update your stock if you've refilled it."
-      );
+      setNoSupplyModalOpen(true);
     } else {
       doFetch('PATCH', { currentSupply: currentSupply - 1 }, drugId).then(
         updateArrayItemInState
@@ -36,6 +44,11 @@ function DrugCardActions({ drugId, currentSupply, setAllDrugData }) {
       >
         View All Drug Info
       </Link>
+      <MessageModal
+        isOpen={noSupplyModalOpen}
+        close={() => setNoSupplyModalOpen(false)}
+        content={noSupplyModalContent}
+      />
     </div>
   );
 }
