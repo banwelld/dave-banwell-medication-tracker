@@ -1,9 +1,11 @@
 import React from 'react';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 function PharmacyReceipts() {
+  useDocumentTitle('Reading Pharmacy Receipts');
   return (
     <>
-      <h3 className='my-3'>Your pharmacy receipt</h3>
+      <h3 className='my-3'>Reading pharmacy receipts</h3>
       <div className='row g-3 mt-3 align-items-center justify-contents-center'>
         <div className='col'>
           <p className='text-secondary lead'>

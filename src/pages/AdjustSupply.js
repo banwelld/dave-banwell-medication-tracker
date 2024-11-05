@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { drugNameSort } from '../utils/helperFunctions';
 import AdjustSupplyForm from '../components/AdjustSupply/AdjustSupplyForm';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 function AdjustSupply() {
+  useDocumentTitle('Adjust Medication Supply');
+
   // get all drug data from app component context
 
   const [allDrugData, setAllDrugData] = useOutletContext();

@@ -9,8 +9,10 @@ import {
   drugNameFilter,
 } from '../utils/helperFunctions';
 import '../css/Home.css';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 function Home() {
+  useDocumentTitle('Home');
   // get the drug data state variables from the app component
 
   const [allDrugData, setAllDrugData] = useOutletContext();

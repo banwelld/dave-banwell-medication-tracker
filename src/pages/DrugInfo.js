@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { drugWarnings } from '../utils/lists';
 import { useOutletContext } from 'react-router-dom';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 function DrugInfo() {
   // get drug data from app component outlet
@@ -31,6 +32,8 @@ function DrugInfo() {
     currentSupply,
   } = drugObject;
 
+  useDocumentTitle(`${brandName} ${doseValue}${doseUnits} Details`);
+
   // get day's supply (rounded down) from currentSupply and dailyDoses
 
   const daysSupply = parseInt(currentSupply / dailyDoses);
@@ -52,7 +55,7 @@ function DrugInfo() {
 
   return (
     <>
-      <h3 className='my-3 g-6'>Your Medication Details</h3>
+      <h3 className='my-3 g-6'>Medication Details</h3>
       <div className='row'>
         <div className='col-4'>
           <h2 className='text-blue'>{brandName}</h2>

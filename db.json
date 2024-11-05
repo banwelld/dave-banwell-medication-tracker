@@ -78,7 +78,7 @@
       "drugFormat": "tablet",
       "doseUnits": "mg",
       "doseValue": 1,
-      "currentSupply": 4,
+      "currentSupply": 3,
       "dailyDoses": 1,
       "isOptional": true,
       "withFood": false,

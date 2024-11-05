@@ -1,6 +1,8 @@
 import React from 'react';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 function ErrorPage() {
+  useDocumentTitle('Error');
   return (
     <div className='row err-pg-container justify-content-center align-items-center align-text-center m-3'>
       <div className='col-2'>
