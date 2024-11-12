@@ -4,15 +4,15 @@ MedTracker is a medication compliance and supply tracking application built with
 
 ## Table of Contents
 
-[Project Overview](#project-overview)
-[Features](#features)
-[Installation](#installation)
-[Usage](#usage)
-[API Endpoints](#api-endpoints)
-[Components](#components)
-[Custom Hooks](#custom-hooks)
-[Technologies Used](#technologies-used)
-[Contributing](#contributing)
+[Project Overview](#project-overview)  
+[Features](#features)  
+[Installation](#installation)  
+[Usage](#usage)  
+[API Endpoints](#api-endpoints)  
+[Components](#components)  
+[Custom Hooks](#custom-hooks)  
+[Technologies Used](#technologies-used)  
+[Contributing](#contributing)  
 [License](#license)
 
 ## Project Overview
@@ -22,9 +22,13 @@ MedTracker is a web-based tool for tracking and managing medications. It allows 
 ## Features
 
 **View Medications**: Displays a list of all current medications, with relevant details.
+
 **Colour-coded Drug Cards**: A drug's card turns amber when user has only 5 days' supply remaining and red when supply is depleted.
+
 **Filter and Sort Medications**: Filter by name substring or sort by days supply remaining.
+
 **Add New Medications**: Users can add new medications by providing details like name, dosage, and schedule.
+
 **Take Now**: Users can click a simple button to track their compliance and deduct doses from their current supply of each medication.
 
 ## Installation
@@ -40,11 +44,6 @@ cd medtracker
 
 ```bash
 npm install
-npm run server
-```
-
-```bash
-npm start
 ```
 
 ## Usage
@@ -60,9 +59,9 @@ You’ll be presented with a dashboard where you can add new medications, view t
 
 MedTracker interacts with a backend API (db.json) running on port 6001 for CRUD operations on medication data. Here’s an outline of the main endpoints:
 
-GET /medications: Retrieve a list of all medications
-POST /medications: Add a new medication
-PUT /medications/#id: Update an existing medication
+GET /medications: Retrieve a list of all medications  
+POST /medications: Add a new medication  
+PUT /medications/#id: Update an existing medication  
 DELETE /medications/#id: Delete a medication
 
 ### Example Fetch Function
@@ -110,10 +109,13 @@ doFetch('POST', newDrugObject).then(addNewItemToState);
 
 ### Key components in MedTracker:
 
-**DrugCardMatrix**: Displays a list of medications.
-**AddDrug form**: Form on the homepage to input and add new medications.
-**AdjustSupply page**: Calculator-like form to update existing medication suplies and even remove medications from user's personal list.
-**ErrModal**: A modal component to show error messages using React portals.
+**DrugCard**: Displays basic inforation about a medication and presents user with a Take Now button to track compliance and supply
+
+**AddDrug form**: Form on the homepage to input and add new medications
+
+**AdjustSupplyForm**: Calculator-like form to update existing medication suplies and even remove medications from user's personal list
+
+**MessageModal**: A modal component to show messages using React portals
 
 ## Custom Hooks
 
@@ -134,18 +136,20 @@ function useDocumentTitle(title) {
 ## Technologies Used
 
 **Frontend**: React, JavaScript, HTML, CSS
+
 **Database**: db.json
+
 **Additional Libraries**: React Router, Bootstrap
 
 ## Contributing
 
 If you'd like to contribute to MedTracker:
 
-- Fork the repository.
-- Create a new branch (git checkout -b feature/YourFeature).
-- Make your changes and commit (git commit -m 'Add new feature').
-- Push to the branch (git push origin feature/YourFeature).
-- Open a Pull Request.
+- Fork the repository
+- Create a new branch (git checkout -b feature/YourFeature)
+- Make your changes and commit (git commit -m 'Add new feature')
+- Push to the branch (git push origin feature/YourFeature)
+- Open a Pull Request
 
 ## License
 
