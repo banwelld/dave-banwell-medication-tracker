@@ -15,20 +15,21 @@ MedTracker is a medication compliance and supply tracking application built with
 [Contributing](#contributing)
 [License](#license)
 
-1. ## Project Overview
+## Project Overview
 
-   MedTracker is a web-based tool for tracking and managing medications. It allows users to add, edit, and remove medications from their list, providing a streamlined way to manage their medication schedule.
+MedTracker is a web-based tool for tracking and managing medications. It allows users to add, edit, and remove medications from their list, providing a streamlined way to manage their medication schedule.
 
-2. ## Features
+## Features
 
-   **View Medications**: Displays a list of all current medications, with relevant details.
-   **Colour-coded Drug Cards**: A drug's card turns amber when user has only 5 days' supply remaining and red when supply is depleted.
-   **Filter and Sort Medications**: Filter by name substring or sort by days supply remaining.
-   **Add New Medications**: Users can add new medications by providing details like name, dosage, and schedule.
-   **Take Now**: Users can click a simple button to track their compliance and deduct doses from their current supply of each medication.
+**View Medications**: Displays a list of all current medications, with relevant details.
+**Colour-coded Drug Cards**: A drug's card turns amber when user has only 5 days' supply remaining and red when supply is depleted.
+**Filter and Sort Medications**: Filter by name substring or sort by days supply remaining.
+**Add New Medications**: Users can add new medications by providing details like name, dosage, and schedule.
+**Take Now**: Users can click a simple button to track their compliance and deduct doses from their current supply of each medication.
 
-3. ## Installation
-   To set up MedTracker locally, ensure you have Node.js and npm installed.
+## Installation
+
+To set up MedTracker locally, ensure you have Node.js and npm installed.
 
 Clone the repository:
 
@@ -46,20 +47,23 @@ npm run server
 npm start
 ```
 
-4. ## Usage
-   To use MedTracker:
+## Usage
 
-Start the server by running npm run server.
-Launch the application by running npm start.
+To use MedTracker:
+
+- Start the server by running npm run server.
+- Launch the application by running npm start.
+
 You’ll be presented with a dashboard where you can add new medications, view the list of medications, and update or delete entries as needed.
 
-5. ## API Endpoints
-   MedTracker interacts with a backend API (db.json) running on port 6001 for CRUD operations on medication data. Here’s an outline of the main endpoints:
+## API Endpoints
 
-GET /medications: Retrieve a list of all medications.
-POST /medications: Add a new medication.
-PUT /medications/#id: Update an existing medication.
-DELETE /medications/#id: Delete a medication.
+MedTracker interacts with a backend API (db.json) running on port 6001 for CRUD operations on medication data. Here’s an outline of the main endpoints:
+
+GET /medications: Retrieve a list of all medications
+POST /medications: Add a new medication
+PUT /medications/#id: Update an existing medication
+DELETE /medications/#id: Delete a medication
 
 ### Example Fetch Function
 
@@ -102,7 +106,7 @@ doFetch().then((data) => setAllDrugData(data));
 doFetch('POST', newDrugObject).then(addNewItemToState);
 ```
 
-6. ## Components
+## Components
 
 ### Key components in MedTracker:
 
@@ -111,8 +115,9 @@ doFetch('POST', newDrugObject).then(addNewItemToState);
 **AdjustSupply page**: Calculator-like form to update existing medication suplies and even remove medications from user's personal list.
 **ErrModal**: A modal component to show error messages using React portals.
 
-7. ## Custom Hooks
-   MedTracker leverages one custom React hook:
+## Custom Hooks
+
+MedTracker leverages one custom React hook:
 
 **useDocumentTitle**: A custom hook to display dynamic page titles on the browser tabs.
 
@@ -126,22 +131,22 @@ function useDocumentTitle(title) {
 }
 ```
 
-8. ## Technologies Used
+## Technologies Used
 
-   **Frontend**: React, JavaScript, HTML, CSS
-   **Database**: db.json
-   **Additional Libraries**: React Router, Bootstrap
+**Frontend**: React, JavaScript, HTML, CSS
+**Database**: db.json
+**Additional Libraries**: React Router, Bootstrap
 
-9. ## Contributing
+## Contributing
 
-   If you'd like to contribute to MedTracker:
+If you'd like to contribute to MedTracker:
 
-10. Fork the repository.
-11. Create a new branch (git checkout -b feature/YourFeature).
-12. Make your changes and commit (git commit -m 'Add new feature').
-13. Push to the branch (git push origin feature/YourFeature).
-14. Open a Pull Request.
+- Fork the repository.
+- Create a new branch (git checkout -b feature/YourFeature).
+- Make your changes and commit (git commit -m 'Add new feature').
+- Push to the branch (git push origin feature/YourFeature).
+- Open a Pull Request.
 
-15. ## License
+## License
 
 See the license tab.
