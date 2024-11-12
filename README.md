@@ -1,75 +1,147 @@
-<<<<<<< HEAD
-# dave-banwell-medication-tracker
-a web app that enables people to track their compliance with and current stock of medications
-=======
-# Getting Started with Create React App
+# MedTracker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+MedTracker is a medication compliance and supply tracking application built with React, designed to simplify medication management by providing a user-friendly interface to add, view, and manage medications and track doses taken.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+[Project Overview](#project-overview)
+[Features](#features)
+[Installation](#installation)
+[Usage](#usage)
+[API Endpoints](#api-endpoints)
+[Components](#components)
+[Custom Hooks](#custom-hooks)
+[Technologies Used](#technologies-used)
+[Contributing](#contributing)
+[License](#license)
 
-### `npm start`
+1. ## Project Overview
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+   MedTracker is a web-based tool for tracking and managing medications. It allows users to add, edit, and remove medications from their list, providing a streamlined way to manage their medication schedule.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+2. ## Features
 
-### `npm test`
+   **View Medications**: Displays a list of all current medications, with relevant details.
+   **Colour-coded Drug Cards**: A drug's card turns amber when user has only 5 days' supply remaining and red when supply is depleted.
+   **Filter and Sort Medications**: Filter by name substring or sort by days supply remaining.
+   **Add New Medications**: Users can add new medications by providing details like name, dosage, and schedule.
+   **Take Now**: Users can click a simple button to track their compliance and deduct doses from their current supply of each medication.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. ## Installation
+   To set up MedTracker locally, ensure you have Node.js and npm installed.
 
-### `npm run build`
+Clone the repository:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+git clone https://github.com/banwelld/dave-banwell-medication-tracker.git
+cd medtracker
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm install
+npm run server
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm start
+```
 
-### `npm run eject`
+4. ## Usage
+   To use MedTracker:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Start the server by running npm run server.
+Launch the application by running npm start.
+You’ll be presented with a dashboard where you can add new medications, view the list of medications, and update or delete entries as needed.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+5. ## API Endpoints
+   MedTracker interacts with a backend API (db.json) running on port 6001 for CRUD operations on medication data. Here’s an outline of the main endpoints:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+GET /medications: Retrieve a list of all medications.
+POST /medications: Add a new medication.
+PUT /medications/#id: Update an existing medication.
+DELETE /medications/#id: Delete a medication.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Example Fetch Function
 
-## Learn More
+The app uses a reusable doFetch function to interact with these endpoints:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```javascript
+const doFetch = (method = 'GET', data = null, id = '') => {
+  const SERVER_URL = `http://localhost:6001/medications/${id}`;
+  const options = {
+    method: method,
+    headers: { 'Content-Type': 'application/json' },
+    body: data && JSON.stringify(data),
+  };
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+  const handleFetchResponse = (response) => {
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+    return response.json();
+  };
 
-### Code Splitting
+  const handleError = (err) => {
+    alert('Error in fetching data. See the console for details.');
+    console.log(err.message);
+  };
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+  return fetch(SERVER_URL, options)
+    .then(handleFetchResponse)
+    .catch(handleError);
+};
+```
 
-### Analyzing the Bundle Size
+doFetch keeps code within the component light and eminently readable, especialy for GET operations:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```javascript
+doFetch().then((data) => setAllDrugData(data));
+```
 
-### Making a Progressive Web App
+```javascript
+doFetch('POST', newDrugObject).then(addNewItemToState);
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+6. ## Components
 
-### Advanced Configuration
+### Key components in MedTracker:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+**DrugCardMatrix**: Displays a list of medications.
+**AddDrug form**: Form on the homepage to input and add new medications.
+**AdjustSupply page**: Calculator-like form to update existing medication suplies and even remove medications from user's personal list.
+**ErrModal**: A modal component to show error messages using React portals.
 
-### Deployment
+7. ## Custom Hooks
+   MedTracker leverages one custom React hook:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+**useDocumentTitle**: A custom hook to display dynamic page titles on the browser tabs.
 
-### `npm run build` fails to minify
+Example:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
->>>>>>> 90705f6 (Initialize project using Create React App)
+```javascript
+function useDocumentTitle(title) {
+  useEffect(() => {
+    document.title = `MedTracker | ${title}`;
+  }, []);
+}
+```
+
+8. ## Technologies Used
+
+   **Frontend**: React, JavaScript, HTML, CSS
+   **Database**: db.json
+   **Additional Libraries**: React Router, Bootstrap
+
+9. ## Contributing
+
+   If you'd like to contribute to MedTracker:
+
+10. Fork the repository.
+11. Create a new branch (git checkout -b feature/YourFeature).
+12. Make your changes and commit (git commit -m 'Add new feature').
+13. Push to the branch (git push origin feature/YourFeature).
+14. Open a Pull Request.
+
+15. ## License
+
+See the license tab.
