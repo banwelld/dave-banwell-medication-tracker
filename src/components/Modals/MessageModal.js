@@ -6,16 +6,16 @@ function MessageModal({ isOpen, content, close }) {
 
   return ReactDOM.createPortal(
     <>
-      <div className='modal-overlay' />
-      <div className='modal-container shadow'>
-        <div className='modal-header'>
+      <div className='msg-modal-overlay' />
+      <div className='msg-modal-container shadow'>
+        <div className='msg-modal-header'>
           <h3>{content.title}</h3>
         </div>
-        <div className='modal-content'>
-          {content.message}
+        <div className='msg-modal-content'>
+          <p>{content.message}</p>
           <button
             type='button'
-            className='btn mx-auto my-3 text-light btn-blue shadow-sm'
+            className='btn mx-auto my-1 text-light btn-blue shadow-sm'
             onClick={close}
           >
             OK
